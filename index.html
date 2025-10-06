@@ -129,6 +129,14 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.25);
         }
 
+        .mobile-nav-header {
+            display: none;
+        }
+
+        .hamburger-menu {
+            display: none;
+        }
+
         .nav-tabs button {
             background: var(--white);
             border: 2px solid var(--fatec-red);
@@ -373,22 +381,89 @@
                 font-size: 1rem;
             }
 
+            /* Mobile Navigation */
+            .mobile-nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+                background: var(--white);
+                border-bottom: 3px solid var(--fatec-red);
+            }
+
+            .mobile-current-section {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--fatec-red);
+                flex: 1;
+                text-align: center;
+            }
+
+            .hamburger-menu {
+                display: block;
+                background: var(--fatec-red);
+                border: none;
+                color: var(--white);
+                font-size: 1.5rem;
+                width: 45px;
+                height: 45px;
+                border-radius: 8px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+
+            .hamburger-menu:active {
+                transform: scale(0.95);
+            }
+
             .nav-tabs {
-                flex-direction: column;
-                margin: 1.5rem 0 1rem 0;
+                position: fixed;
                 top: 0;
-                padding: 0.8rem 0.5rem;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                flex-direction: column;
+                background: var(--white);
+                padding: 2rem 1rem;
+                margin: 0;
+                box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+                transition: left 0.3s ease;
+                overflow-y: auto;
+                z-index: 1001;
+            }
+
+            .nav-tabs.menu-open {
+                left: 0;
+            }
+
+            .nav-tabs button {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: 1000;
+            }
+
+            .menu-overlay.active {
+                display: block;
             }
 
             .nav-tabs.fixed-header {
                 padding-left: 1rem;
                 padding-right: 1rem;
-            }
-
-            .nav-tabs button {
-                width: 100%;
-                padding: 0.7rem 1rem;
-                font-size: 0.9rem;
             }
 
             .card {
@@ -458,6 +533,15 @@
     </header>
 
     <div class="container">
+        <div class="mobile-nav-header">
+            <button class="hamburger-menu" onclick="toggleMenu()" aria-label="Menu">
+                ☰
+            </button>
+            <div class="mobile-current-section" id="currentSection">Resumo</div>
+        </div>
+
+        <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
         <div class="hero">
             <div class="hero-content">
                 <h2>Estruturas Organizacionais</h2>
@@ -722,6 +806,25 @@
     </footer>
 
     <script>
+        // Mapa de nomes das seções
+        const sectionNames = {
+            'resumo': 'Resumo',
+            'introducao': 'Introdução',
+            'fundamentacao': 'Fundamentação Teórica',
+            'metodologia': 'Metodologia',
+            'discussao': 'Discussão',
+            'conclusao': 'Conclusão',
+            'referencias': 'Referências'
+        };
+
+        function toggleMenu() {
+            const navTabs = document.querySelector('.nav-tabs');
+            const overlay = document.getElementById('menuOverlay');
+            
+            navTabs.classList.toggle('menu-open');
+            overlay.classList.toggle('active');
+        }
+
         function showSection(sectionId) {
             // Remove active class from all sections and buttons
             const sections = document.querySelectorAll('.section');
@@ -734,6 +837,17 @@
             const activeSection = document.getElementById(sectionId);
             activeSection.classList.add('active');
             event.target.classList.add('active');
+            
+            // Atualiza o texto do header mobile
+            const currentSectionDisplay = document.getElementById('currentSection');
+            if (currentSectionDisplay) {
+                currentSectionDisplay.textContent = sectionNames[sectionId] || 'Menu';
+            }
+            
+            // Fecha o menu mobile
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
             
             // Pega a altura do menu fixo + uma margem
             const navTabs = document.querySelector('.nav-tabs');
