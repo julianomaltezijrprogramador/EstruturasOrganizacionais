@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Acadêmico | FATEC Ribeirão Preto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --fatec-red: #8B0000;
+            --fatec-dark-red: #6B0000;
+            --fatec-gray: #333333;
+            --fatec-light-gray: #F5F5F5;
+            --text-color: #2C2C2C;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--fatec-light-gray);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--fatec-red) 0%, var(--fatec-dark-red) 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--fatec-red);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(139,0,0,0.95) 0%, rgba(107,0,0,0.95) 100%),
+                        url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=400&fit=crop') center/cover;
+            color: var(--white);
+            padding: 6rem 0;
+            margin-top: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin: 3rem 0 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tabs button {
+            background: var(--white);
+            border: 2px solid var(--fatec-red);
+            color: var(--fatec-red);
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs button:hover,
+        .nav-tabs button.active {
+            background: var(--fatec-red);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139,0,0,0.3);
+        }
+
+        .section {
+            background: var(--white);
+            padding: 3rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: var(--fatec-red);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--fatec-red);
+            padding-left: 1rem;
+        }
+
+        .section h3 {
+            color: var(--fatec-dark-red);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .section p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .image-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .keyword {
+            background: var(--fatec-red);
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--fatec-gray) 0%, var(--fatec-dark-red) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .authors {
+            background: var(--fatec-light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .authors h3 {
+            color: var(--fatec-red);
+            margin-bottom: 1rem;
+        }
+
+        .authors ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .authors li {
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .authors li:before {
+            content: "▪ ";
+            color: var(--fatec-red);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139,0,0,0.1) 0%, rgba(107,0,0,0.05) 100%);
+            border: 2px solid var(--fatec-red);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box strong {
+            color: var(--fatec-red);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .nav-tabs button {
+                width: 100%;
+            }
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--fatec-red);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--fatec-dark-red);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">FATEC</div>
+            <div class="header-text">
+                <h1>FATEC - Ribeirão Preto</h1>
+                <p>Trabalho de (DISCIPLINA) | (CICLO) 2025</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h2>TÍTULO:</h2>
+                <p>Subtítulo do Trabalho (se houver)</p>
+            </div>
+        </div>
+
+        <div class="authors">
+            <h3>Autores do Trabalho</h3>
+            <ul>
+                <li>AUTOR(ES) DO TRABALHO</li>
+                <li>(Nomes completos)</li>
+            </ul>
+            <p style="margin-top: 1rem; font-style: italic; color: var(--fatec-gray);">
+                Profª Drª XXXXXXXX | Tecnologia em XXXXX
+            </p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="active" onclick="showSection('resumo')">Resumo</button>
+            <button onclick="showSection('introducao')">Introdução</button>
+            <button onclick="showSection('fundamentacao')">Fundamentação Teórica</button>
+            <button onclick="showSection('metodologia')">Metodologia</button>
+            <button onclick="showSection('discussao')">Discussão</button>
+            <button onclick="showSection('conclusao')">Conclusão</button>
+            <button onclick="showSection('referencias')">Referências</button>
+        </div>
+
+        <div id="resumo" class="section active">
+            <h2>Resumo</h2>
+            <p>O resumo deve ser iniciado sem parágrafo, em texto único e com espaçamento simples entre linhas, sem enumeração de tópicos e deve conter entre 150 e 500 palavras. O resumo deve ressaltar o objetivo, o método, os resultados e as conclusões do documento. Deve-se usar o verbo na voz ativa e na terceira pessoa do singular. As palavras-chave devem figurar logo abaixo do resumo, antecedidas da expressão "palavras-chave:", separadas entre si por ponto e vírgula finalizadas por ponto. As palavras-chave devem ser grafadas com as iniciais em minúscula, com exceção dos substantivos próprios.</p>
+
+            <div class="keywords">
+                <span class="keyword">palavra 1</span>
+                <span class="keyword">palavra 2</span>
+                <span class="keyword">palavra 3</span>
+                <span class="keyword">palavra 4</span>
+                <span class="keyword">palavra 5</span>
+            </div>
+        </div>
+
+        <div id="introducao" class="section">
+            <h2>1. Introdução</h2>
+            
+            <p>Contextualização, relevância e justificativa da pesquisa, fundamentada em referências relacionadas ao objetivo do trabalho, descrição do problema, objetivo geral e contribuições (se houver).</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop" alt="Introdução">
+            </div>
+        </div>
+
+        <div id="fundamentacao" class="section">
+            <h2>2. Fundamentação Teórica</h2>
+
+            <p>Contextualização, relevância e justificativa da pesquisa, fundamentada em referências relacionadas ao objetivo do trabalho, descrição do problema, objetivo geral e contribuições (se houver).</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=400&fit=crop" alt="Fundamentação">
+            </div>
+
+            <h3>2.1 Título do subcapítulo</h3>
+            
+            <p><strong>Tipos de citações:</strong></p>
+
+            <div class="highlight-box">
+                <strong>Citação indireta (mais recomendada)</strong>
+                <p style="margin-top: 1rem;">Exemplo:</p>
+                <p>(FULANO, 2010) texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.</p>
+                <p style="margin-top: 0.5rem;">Ou</p>
+                <p>Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto (FULANO, 2010).</p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <strong>Citação direta (até três linhas, cópia literal)</strong>
+                <p style="margin-top: 1rem;">Exemplo:</p>
+                <p>Conforme Fulano (2010, p. 45), "Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto".</p>
+                <p style="margin-top: 1rem;">Em caso de supressão tanto no início, meio e fim da frase deve-se utilizar três pontos entre colchetes e letra minúscula no início da frase. Exemplo:</p>
+                <p>De acordo com Fulano (2010, p. 45), "[...] texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto [...]".</p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <strong>Citação longa (com mais de 3 linhas, cópia literal)</strong>
+                <p style="margin-top: 1rem; padding-left: 2rem; font-size: 0.95rem;">As citações de mais de 3 linhas devem ser digitadas em corpo 10, recuo 4 cm à esquerda, com espaçamento simples entre as linhas e destacadas do texto por margem esquerda maior que a do parágrafo; as citações de até três linhas devem integrar o corpo do texto e ser assinaladas entre aspas. Informar (FULANO, 2010, p. 45).</p>
+            </div>
+        </div>
+
+        <div id="metodologia" class="section">
+            <h2>3. Metodologia</h2>
+
+            <p>Nesta seção você irá descrever de forma clara e precisa como o seu estudo foi executado. O estilo de escrita dessa seção deve parecer como se você estivesse explicando verbalmente como conduziu seu estudo. Evite a utilização de primeira pessoa e lembre de escrever no passado, uma vez que o estudo já foi feito.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=400&fit=crop" alt="Metodologia">
+            </div>
+
+            <p>É importante ter em mente que as informações vão depender de cada área, mas é comum que essa seção seja organizada da seguinte forma:</p>
+
+            <div class="highlight-box">
+                <p><strong>1.</strong> Descrição do objeto de estudo: sua origem, como foi encontrado, seu tamanho, tecnologias utilizadas na construção, etc</p>
+                <p style="margin-top: 0.5rem;"><strong>2.</strong> Quando necessário, a descrição do local onde o estudo foi realizado e quais eram as condições;</p>
+                <p style="margin-top: 0.5rem;"><strong>3.</strong> Como os dados foram coletados durante o experimento. Nesse caso, escreva com detalhe suficiente para que o outro pesquisador, lendo seu texto, tenha condição de repetir seu estudo;</p>
+                <p style="margin-top: 0.5rem;"><strong>4.</strong> Descrição da análise dos dados. Aqui você irá indicar qual método utilizou, como e que tipo de análise foi empregada para responder cada questão de pesquisa ou testar as hipóteses do estudo;</p>
+                <p style="margin-top: 0.5rem;"><strong>5.</strong> Por isso, você precisa ter descrito também a questão de pesquisa e as hipóteses do trabalho. Em alguns estudos com variáveis, isso também será indicado neste momento.</p>
+            </div>
+        </div>
+
+        <div id="discussao" class="section">
+            <h2>4. Discussão</h2>
+
+            <p>Tem como objetivo interpretar os resultados com relação aos achados encontrados no estudo e explicar o entendimento sobre o assunto com base nos novos resultados. De certa forma, a seção de discussão estabelecerá uma ligação entre o que você falou na introdução, com as questões de pesquisa e hipóteses, e os artigos que você citou. Portanto, essa seção irá mostrar ao leitor como o estudo se desenvolveu a partir dos questionamentos deixados na introdução. Use a voz ativa sempre que possível. Cuidado com frases prolixas, seja conciso e escreva claramente.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=400&fit=crop" alt="Discussão">
+            </div>
+        </div>
+
+        <div id="conclusao" class="section">
+            <h2>5. Conclusão</h2>
+
+            <p>Visão geral, contribuições e limitações do trabalho.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=400&fit=crop" alt="Conclusão">
+            </div>
+        </div>
+
+        <div id="referencias" class="section">
+            <h2>Referências</h2>
+
+            <div class="highlight-box">
+                <p><strong>Formato para Livros:</strong></p>
+                <p style="margin-left: 1rem;">SOBRENOME, Nome Abreviado. <strong>Título:</strong> subtítulo. Edição. Local de publicação: Editora, data de publicação da obra.</p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 1.5rem;">
+                <p><strong>Formato para Sites:</strong></p>
+                <p style="margin-left: 1rem; margin-top: 0.5rem;"><strong>Com autor:</strong> SOBRENOME, Nome. Título da matéria. <strong>Nome do site</strong>, ano. Disponível em: &lt;URL&gt;. Acesso em: dia, mês e ano.</p>
+                <p style="margin-left: 1rem; margin-top: 0.5rem;"><strong>Sem autor:</strong> TÍTULO da matéria. <strong>Nome do site</strong>, ano. Disponível em: &lt;URL&gt;. Acesso em: dia, mês e ano.</p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 1.5rem;">
+                <p><strong>Formato para Artigo Científico:</strong></p>
+                <p style="margin-left: 1rem;">SOBRENOME, Nome(s) abreviado(s). Título do artigo. <strong>Título da Revista</strong>, local de publicação, volume do exemplar, número do exemplar, p. (página inicial e final do artigo), mês, ano de publicação. Disponível em: link. Acesso em: data de acesso.</p>
+            </div>
+
+            <div class="image-container" style="margin-top: 3rem;">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=300&fit=crop" alt="Biblioteca">
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ↑
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>FATEC - Faculdade de Tecnologia de Ribeirão Preto</strong></p>
+            <p>Trabalho Acadêmico | 2025</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">© 2025 - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('.nav-tabs button');
+            
+            sections.forEach(section => section.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            
+            const navTabs = document.querySelector('.nav-tabs');
+            const navPosition = navTabs.getBoundingClientRect().top + window.pageYOffset - 150;
+            
+            window.scrollTo({ 
+                top: navPosition, 
+                behavior: 'smooth' 
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
