@@ -167,13 +167,12 @@
             margin: 0 0 1.5rem 0;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: none;
+            display: block;
             animation: fadeIn 0.5s ease;
-            scroll-margin-top: 120px;
         }
 
         .section.active {
-            display: block;
+            /* Mantém a classe para compatibilidade, mas não altera display */
         }
 
         @keyframes fadeIn {
@@ -823,6 +822,9 @@
             'referencias': 'Referências'
         };
 
+        let isScrollingFromClick = false;
+        let scrollTimeout = null;
+
         function toggleMenu() {
             const navTabs = document.querySelector('.nav-tabs');
             const overlay = document.getElementById('menuOverlay');
@@ -832,54 +834,105 @@
         }
 
         function showSection(sectionId) {
-            // Remove active class from all sections and buttons
-            const sections = document.querySelectorAll('.section');
-            const buttons = document.querySelectorAll('.nav-tabs button');
+            // Marca que estamos rolando por clique
+            isScrollingFromClick = true;
             
-            sections.forEach(section => section.classList.remove('active'));
-            buttons.forEach(button => button.classList.remove('active'));
-            
-            // Add active class to selected section and button
-            const activeSection = document.getElementById(sectionId);
-            activeSection.classList.add('active');
-            event.target.classList.add('active');
-            
-            // Atualiza o texto do header mobile
-            const currentSectionDisplay = document.getElementById('currentSection');
-            if (currentSectionDisplay) {
-                currentSectionDisplay.textContent = sectionNames[sectionId] || 'Menu';
+            // Limpa timeout anterior se existir
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
             }
             
-            // Fecha o menu mobile
+            // Fecha o menu mobile se estiver aberto
             const isMobile = window.innerWidth <= 768;
             if (isMobile) {
                 toggleMenu();
             }
             
+            // Atualiza manualmente os botões e o header mobile
+            const buttons = document.querySelectorAll('.nav-tabs button');
+            const currentSectionDisplay = document.getElementById('currentSection');
+            
+            buttons.forEach(button => {
+                const buttonSection = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                if (buttonSection === sectionId) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+            
+            if (currentSectionDisplay) {
+                currentSectionDisplay.textContent = sectionNames[sectionId] || 'Menu';
+            }
+            
+            // Pega a seção alvo
+            const targetSection = document.getElementById(sectionId);
+            
             // Aguarda o fechamento do menu antes de rolar
             setTimeout(() => {
-                // Pega a posição da seção
-                const sectionRect = activeSection.getBoundingClientRect();
-                const sectionPosition = sectionRect.top + window.pageYOffset;
-                
-                // Ajusta o scroll baseado no dispositivo
+                // Calcula offset baseado no dispositivo
                 let offset;
                 if (isMobile) {
-                    // Mobile: considera o header mobile compacto
                     const mobileHeader = document.querySelector('.mobile-nav-header');
                     offset = mobileHeader ? mobileHeader.offsetHeight + 10 : 80;
                 } else {
-                    // Desktop: considera o menu de navegação
                     const navTabs = document.querySelector('.nav-tabs');
                     offset = navTabs ? navTabs.offsetHeight + 20 : 100;
                 }
                 
-                // Rola para a seção considerando o offset
+                // Rola até a seção
+                const sectionPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({ 
                     top: sectionPosition - offset,
                     behavior: 'smooth' 
                 });
-            }, isMobile ? 300 : 0); // Aguarda a animação do menu fechar em mobile
+                
+                // Reativa a detecção automática após 1 segundo
+                scrollTimeout = setTimeout(() => {
+                    isScrollingFromClick = false;
+                }, 1000);
+            }, isMobile ? 300 : 0);
+        }
+
+        // Detecta qual seção está visível e atualiza menu automaticamente
+        function updateActiveSection() {
+            // Não atualiza se estamos rolando por clique
+            if (isScrollingFromClick) {
+                return;
+            }
+            
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('.nav-tabs button');
+            const currentSectionDisplay = document.getElementById('currentSection');
+            
+            let currentSection = 'resumo';
+            
+            // Calcula qual seção está mais visível na viewport
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const isMobile = window.innerWidth <= 768;
+                const threshold = isMobile ? 100 : 150;
+                
+                // Se o topo da seção está próximo do topo da viewport
+                if (rect.top <= threshold && rect.bottom >= threshold) {
+                    currentSection = section.id;
+                }
+            });
+            
+            // Atualiza os botões ativos
+            buttons.forEach(button => {
+                const buttonSection = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                if (buttonSection === currentSection) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+            
+            // Atualiza o texto do header mobile
+            if (currentSectionDisplay) {
+                currentSectionDisplay.textContent = sectionNames[currentSection] || 'Menu';
+            }
         }
 
         // Scroll to top button functionality
@@ -902,6 +955,9 @@
                     navTabs.classList.remove('fixed-header');
                 }
             }
+            
+            // Atualiza a seção ativa baseado no scroll
+            updateActiveSection();
         });
 
         function scrollToTop() {
