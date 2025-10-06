@@ -104,6 +104,18 @@
             opacity: 0.95;
         }
 
+        .mobile-nav-header {
+            display: none;
+        }
+
+        .hamburger-menu {
+            display: none;
+        }
+
+        .menu-overlay {
+            display: none;
+        }
+
         .nav-tabs {
             display: flex;
             gap: 0.5rem;
@@ -127,14 +139,6 @@
             padding-left: 2rem;
             padding-right: 2rem;
             box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-        }
-
-        .mobile-nav-header {
-            display: none;
-        }
-
-        .hamburger-menu {
-            display: none;
         }
 
         .nav-tabs button {
@@ -332,6 +336,35 @@
             font-size: 1.1rem;
         }
 
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--fatec-red);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--fatec-dark-red);
+            transform: translateY(-5px);
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 1rem;
@@ -381,26 +414,21 @@
                 font-size: 1rem;
             }
 
-            /* Mobile Navigation */
             .mobile-nav-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 1rem;
+                padding: 1rem 2rem;
                 background: var(--white);
                 border-bottom: 3px solid var(--fatec-red);
                 position: sticky;
                 top: 0;
                 z-index: 998;
                 transition: all 0.3s ease;
-                margin-left: -1rem;
-                margin-right: -1rem;
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
-
-            .mobile-nav-header.fixed-header {
-                box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+                width: 100vw;
+                margin-left: calc(-50vw + 50%);
+                margin-right: calc(-50vw + 50%);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             }
 
             .mobile-current-section {
@@ -473,11 +501,6 @@
                 display: block;
             }
 
-            .nav-tabs.fixed-header {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
             .card {
                 padding: 1.5rem;
             }
@@ -501,35 +524,6 @@
             .container {
                 padding: 0 1rem;
             }
-        }
-
-        .scroll-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--fatec-red);
-            color: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            background: var(--fatec-dark-red);
-            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -857,22 +851,35 @@
             }
             
             // Fecha o menu mobile
-            if (window.innerWidth <= 768) {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
                 toggleMenu();
             }
             
-            // Pega a altura do menu fixo + uma margem
-            const navTabs = document.querySelector('.nav-tabs');
-            const menuHeight = navTabs.offsetHeight + 20; // 20px de margem extra
-            
-            // Pega a posição da seção
-            const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
-            
-            // Rola para a seção considerando a altura do menu
-            window.scrollTo({ 
-                top: sectionPosition - menuHeight,
-                behavior: 'smooth' 
-            });
+            // Aguarda o fechamento do menu antes de rolar
+            setTimeout(() => {
+                // Pega a posição da seção
+                const sectionRect = activeSection.getBoundingClientRect();
+                const sectionPosition = sectionRect.top + window.pageYOffset;
+                
+                // Ajusta o scroll baseado no dispositivo
+                let offset;
+                if (isMobile) {
+                    // Mobile: considera o header mobile compacto
+                    const mobileHeader = document.querySelector('.mobile-nav-header');
+                    offset = mobileHeader ? mobileHeader.offsetHeight + 10 : 80;
+                } else {
+                    // Desktop: considera o menu de navegação
+                    const navTabs = document.querySelector('.nav-tabs');
+                    offset = navTabs ? navTabs.offsetHeight + 20 : 100;
+                }
+                
+                // Rola para a seção considerando o offset
+                window.scrollTo({ 
+                    top: sectionPosition - offset,
+                    behavior: 'smooth' 
+                });
+            }, isMobile ? 300 : 0); // Aguarda a animação do menu fechar em mobile
         }
 
         // Scroll to top button functionality
@@ -893,18 +900,6 @@
                     navTabs.classList.add('fixed-header');
                 } else {
                     navTabs.classList.remove('fixed-header');
-                }
-            } else {
-                // Mobile: Detecta quando o header mobile fica fixo no topo
-                const mobileHeader = document.querySelector('.mobile-nav-header');
-                if (mobileHeader) {
-                    const headerRect = mobileHeader.getBoundingClientRect();
-                    
-                    if (headerRect.top <= 0) {
-                        mobileHeader.classList.add('fixed-header');
-                    } else {
-                        mobileHeader.classList.remove('fixed-header');
-                    }
                 }
             }
         });
