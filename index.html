@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabalho Acadêmico | FATEC Ribeirão Preto</title>
+    <title>Estruturas Organizacionais | FATEC Ribeirão Preto</title>
     <style>
         * {
             margin: 0;
@@ -12,11 +12,10 @@
         }
 
         :root {
-            --fatec-red: #5B2EFF;
-            --fatec-dark-red: #4A00B5;
-            --fatec-accent: #00C4CC;
+            --fatec-red: #8B0000;
+            --fatec-dark-red: #6B0000;
             --fatec-gray: #333333;
-            --fatec-light-gray: #F5F7FA;
+            --fatec-light-gray: #F5F5F5;
             --text-color: #2C2C2C;
             --white: #FFFFFF;
         }
@@ -79,7 +78,7 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, rgba(91,46,255,0.95) 0%, rgba(74,0,181,0.95) 100%),
+            background: linear-gradient(135deg, rgba(139,0,0,0.95) 0%, rgba(107,0,0,0.95) 100%),
                         url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=400&fit=crop') center/cover;
             color: var(--white);
             padding: 6rem 0;
@@ -197,6 +196,32 @@
             transform: scale(1.05);
         }
 
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--fatec-light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--fatec-red);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(139,0,0,0.2);
+        }
+
+        .card h4 {
+            color: var(--fatec-red);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
         .keywords {
             display: flex;
             flex-wrap: wrap;
@@ -205,13 +230,25 @@
         }
 
         .keyword {
-            background: linear-gradient(135deg, var(--fatec-red) 0%, var(--fatec-dark-red) 100%);
+            background: var(--fatec-red);
             color: var(--white);
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            box-shadow: 0 2px 8px rgba(91,46,255,0.3);
+        }
+
+        .references {
+            background: var(--fatec-light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--fatec-dark-red);
+        }
+
+        .references p {
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
         }
 
         .footer {
@@ -257,7 +294,7 @@
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, rgba(91,46,255,0.08) 0%, rgba(0,196,204,0.08) 100%);
+            background: linear-gradient(135deg, rgba(139,0,0,0.1) 0%, rgba(107,0,0,0.05) 100%);
             border: 2px solid var(--fatec-red);
             border-radius: 10px;
             padding: 2rem;
@@ -304,7 +341,7 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: linear-gradient(135deg, var(--fatec-red) 0%, var(--fatec-dark-red) 100%);
+            background: var(--fatec-red);
             color: var(--white);
             width: 50px;
             height: 50px;
@@ -313,7 +350,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(91,46,255,0.4);
+            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
             transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
@@ -325,9 +362,8 @@
         }
 
         .scroll-top:hover {
-            background: linear-gradient(135deg, var(--fatec-accent) 0%, #00A8B0 100%);
+            background: var(--fatec-dark-red);
             transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0,196,204,0.5);
         }
     </style>
 </head>
@@ -337,7 +373,7 @@
             <div class="logo">FATEC</div>
             <div class="header-text">
                 <h1>FATEC - Ribeirão Preto</h1>
-                <p>Trabalho de (DISCIPLINA) | (CICLO) 2025</p>
+                <p>Trabalho de Administração Geral | 1º Bimestre 2025</p>
             </div>
         </div>
     </header>
@@ -345,19 +381,23 @@
     <div class="container">
         <div class="hero">
             <div class="hero-content">
-                <h2>TÍTULO:</h2>
-                <p>Subtítulo do Trabalho (se houver)</p>
+                <h2>Estruturas Organizacionais</h2>
+                <p>Análise de Impactos no Desempenho de Empresas de Tecnologia</p>
             </div>
         </div>
 
         <div class="authors">
             <h3>Autores do Trabalho</h3>
             <ul>
-                <li>AUTOR(ES) DO TRABALHO</li>
-                <li>(Nomes completos)</li>
+                <li>Antenor Hugo Pereira Fiuza</li>
+                <li>Juliano Rocha Maltezi Junior</li>
+                <li>Leandro de Souza Sertorio</li>
+                <li>Lucas Malheiros</li>
+                <li>Pedro Henrique de Aquino Soares</li>
+                <li>Pedro Lucas Arcanjo</li>
             </ul>
             <p style="margin-top: 1rem; font-style: italic; color: var(--fatec-gray);">
-                Profª Drª XXXXXXXX | Tecnologia em XXXXX
+                Profª Suzana Marcia Morangoni | Tecnologia em Análise e Desenvolvimento de Sistemas
             </p>
         </div>
 
@@ -373,123 +413,219 @@
 
         <div id="resumo" class="section active">
             <h2>Resumo</h2>
-            <p>O resumo deve ser iniciado sem parágrafo, em texto único e com espaçamento simples entre linhas, sem enumeração de tópicos e deve conter entre 150 e 500 palavras. O resumo deve ressaltar o objetivo, o método, os resultados e as conclusões do documento. Deve-se usar o verbo na voz ativa e na terceira pessoa do singular. As palavras-chave devem figurar logo abaixo do resumo, antecedidas da expressão "palavras-chave:", separadas entre si por ponto e vírgula finalizadas por ponto. As palavras-chave devem ser grafadas com as iniciais em minúscula, com exceção dos substantivos próprios.</p>
+            <p>Este estudo analisa as diferentes estruturas organizacionais presentes em empresas do setor de tecnologia, identificando características de estruturas tradicionais e inovativas e seus respectivos impactos no desempenho organizacional. A pesquisa fundamenta-se na análise de artigos científicos que abordam modelos de gestão contemporâneos, com foco especial nas transformações estruturais necessárias para empresas que buscam maior agilidade e competitividade.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=400&fit=crop" alt="Equipe de tecnologia trabalhando">
+            </div>
+
+            <p>Observa-se que estruturas tradicionais, caracterizadas por hierarquias rígidas e centralização de poder, apresentam limitações significativas em ambientes dinâmicos e de rápida inovação tecnológica. Por outro lado, estruturas inovativas, baseadas em maior autonomia, equipes multifuncionais e descentralização decisória, demonstram melhor adaptação às demandas do mercado tecnológico atual.</p>
+            
+            <p>A análise evidencia que a escolha da estrutura organizacional impacta diretamente aspectos como produtividade, inovação, satisfação dos colaboradores e capacidade de resposta estratégica. Aplicando teorias administrativas clássicas e contemporâneas, o estudo propõe recomendações para otimização do desempenho organizacional no contexto tecnológico.</p>
 
             <div class="keywords">
-                <span class="keyword">palavra 1</span>
-                <span class="keyword">palavra 2</span>
-                <span class="keyword">palavra 3</span>
-                <span class="keyword">palavra 4</span>
-                <span class="keyword">palavra 5</span>
+                <span class="keyword">estruturas organizacionais</span>
+                <span class="keyword">empresas de tecnologia</span>
+                <span class="keyword">estruturas inovativas</span>
+                <span class="keyword">desempenho organizacional</span>
+                <span class="keyword">gestão estratégica</span>
             </div>
         </div>
 
         <div id="introducao" class="section">
             <h2>1. Introdução</h2>
             
-            <p>Contextualização, relevância e justificativa da pesquisa, fundamentada em referências relacionadas ao objetivo do trabalho, descrição do problema, objetivo geral e contribuições (se houver).</p>
+            <div class="highlight-box">
+                <strong>Problema de Pesquisa:</strong> Como as diferentes estruturas organizacionais impactam o desempenho de empresas de tecnologia em aspectos como produção, hierarquia, autonomia, estratégia e trabalho em equipe?
+            </div>
+
+            <p>A estrutura organizacional representa um dos elementos fundamentais para o sucesso empresarial, especialmente em setores caracterizados por alta competitividade e constante transformação, como o de tecnologia. A forma como uma organização define sua hierarquia, distribui autoridade e estabelece canais de comunicação influencia diretamente sua capacidade de inovar, adaptar-se às mudanças do mercado e atingir objetivos estratégicos.</p>
 
             <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop" alt="Introdução">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop" alt="Estrutura organizacional">
+            </div>
+
+            <p>No contexto atual, empresas de tecnologia enfrentam desafios únicos que questionam a eficácia de modelos tradicionais de gestão. A velocidade das inovações tecnológicas, a necessidade de respostas ágeis às demandas do mercado e a importância do capital intelectual exigem estruturas mais flexíveis e colaborativas. Segundo estudos recentes, organizações que adotam estruturas inovativas tendem a apresentar melhor desempenho em indicadores como capacidade de inovação, engajamento de colaboradores e resultados financeiros.</p>
+
+            <p>Este trabalho tem como objetivo analisar as diferenças entre estruturas organizacionais tradicionais e inovativas no setor de tecnologia, identificando seus impactos em diferentes dimensões do desempenho empresarial. A relevância desta pesquisa reside na necessidade de compreender quais configurações estruturais são mais adequadas para organizações que operam em ambientes de alta incerteza e dinamismo tecnológico.</p>
+
+            <div class="highlight-box">
+                <strong>Objetivo Geral:</strong> Analisar os efeitos das estruturas organizacionais tradicionais e inovativas no desempenho de empresas do setor tecnológico, propondo recomendações baseadas em teorias administrativas para melhoria da gestão organizacional.
             </div>
         </div>
 
         <div id="fundamentacao" class="section">
             <h2>2. Fundamentação Teórica</h2>
 
-            <p>Contextualização, relevância e justificativa da pesquisa, fundamentada em referências relacionadas ao objetivo do trabalho, descrição do problema, objetivo geral e contribuições (se houver).</p>
+            <h3>2.1 Estruturas Organizacionais: Conceitos Fundamentais</h3>
+            <p>A estrutura organizacional pode ser compreendida como o conjunto de relações formais entre os diversos grupos e indivíduos que compõem uma organização. Ela define a divisão de trabalho, estabelece níveis hierárquicos, determina canais de comunicação e especifica responsabilidades e autoridades. A escolha da estrutura organizacional adequada representa uma decisão estratégica que influencia diretamente a eficiência operacional e a capacidade de alcançar objetivos empresariais.</p>
 
             <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=400&fit=crop" alt="Fundamentação">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=400&fit=crop" alt="Organograma e estrutura">
             </div>
 
-            <h3>2.1 Título do subcapítulo</h3>
+            <p>As teorias clássicas da administração, desenvolvidas por autores como Henri Fayol e Frederick Taylor, enfatizavam a importância da hierarquia clara, da divisão especializada do trabalho e da unidade de comando. Esses princípios deram origem às estruturas tradicionais, caracterizadas por múltiplos níveis hierárquicos, centralização decisória e departamentalização funcional.</p>
+
+            <h3>2.2 Estruturas Tradicionais vs. Inovativas</h3>
             
-            <p><strong>Tipos de citações:</strong></p>
-
-            <div class="highlight-box">
-                <strong>Citação indireta (mais recomendada)</strong>
-                <p style="margin-top: 1rem;">Exemplo:</p>
-                <p>(FULANO, 2010) texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.</p>
-                <p style="margin-top: 0.5rem;">Ou</p>
-                <p>Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto (FULANO, 2010).</p>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📊 Estruturas Tradicionais</h4>
+                    <p>• Hierarquia verticalizada</p>
+                    <p>• Centralização do poder decisório</p>
+                    <p>• Comunicação vertical</p>
+                    <p>• Divisão rígida de tarefas</p>
+                    <p>• Formalização de processos</p>
+                </div>
+                <div class="card">
+                    <h4>🚀 Estruturas Inovativas</h4>
+                    <p>• Horizontalização hierárquica</p>
+                    <p>• Descentralização decisória</p>
+                    <p>• Comunicação multidirecional</p>
+                    <p>• Autonomia de equipes</p>
+                    <p>• Flexibilidade e adaptação</p>
+                </div>
             </div>
 
-            <div class="highlight-box" style="margin-top: 2rem;">
-                <strong>Citação direta (até três linhas, cópia literal)</strong>
-                <p style="margin-top: 1rem;">Exemplo:</p>
-                <p>Conforme Fulano (2010, p. 45), "Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto".</p>
-                <p style="margin-top: 1rem;">Em caso de supressão tanto no início, meio e fim da frase deve-se utilizar três pontos entre colchetes e letra minúscula no início da frase. Exemplo:</p>
-                <p>De acordo com Fulano (2010, p. 45), "[...] texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto [...]".</p>
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=400&fit=crop" alt="Equipe colaborativa">
             </div>
 
-            <div class="highlight-box" style="margin-top: 2rem;">
-                <strong>Citação longa (com mais de 3 linhas, cópia literal)</strong>
-                <p style="margin-top: 1rem; padding-left: 2rem; font-size: 0.95rem;">As citações de mais de 3 linhas devem ser digitadas em corpo 10, recuo 4 cm à esquerda, com espaçamento simples entre as linhas e destacadas do texto por margem esquerda maior que a do parágrafo; as citações de até três linhas devem integrar o corpo do texto e ser assinaladas entre aspas. Informar (FULANO, 2010, p. 45).</p>
-            </div>
+            <h3>2.3 Impactos no Desempenho Organizacional</h3>
+            <p>A estrutura organizacional influencia múltiplas dimensões do desempenho empresarial. Na produção e operações, estruturas tradicionais podem oferecer maior previsibilidade e controle de qualidade através de processos padronizados, enquanto estruturas inovativas tendem a proporcionar maior flexibilidade para adaptação de processos e customização de produtos.</p>
+
+            <p>Quanto à autonomia dos colaboradores, em modelos tradicionais ela é limitada por procedimentos rígidos, enquanto estruturas inovativas promovem maior empowerment, resultando em maior satisfação profissional e capacidade de inovação.</p>
+
+            <h3>2.4 Teorias Administrativas Aplicáveis</h3>
+            <p>A Teoria Contingencial enfatiza que não existe uma estrutura ideal universal, mas sim configurações mais adequadas a contextos específicos. Para empresas de tecnologia, esta teoria sugere que a estrutura deve ser contingente ao nível de incerteza do ambiente, complexidade tecnológica e estratégia competitiva adotada.</p>
+
+            <p>A Teoria dos Sistemas proporciona uma visão holística da organização, reconhecendo a interdependência entre diferentes componentes estruturais. Esta perspectiva é particularmente relevante para empresas de tecnologia, onde a integração entre áreas é fundamental para o sucesso.</p>
         </div>
 
         <div id="metodologia" class="section">
             <h2>3. Metodologia</h2>
 
-            <p>Nesta seção você irá descrever de forma clara e precisa como o seu estudo foi executado. O estilo de escrita dessa seção deve parecer como se você estivesse explicando verbalmente como conduziu seu estudo. Evite a utilização de primeira pessoa e lembre de escrever no passado, uma vez que o estudo já foi feito.</p>
+            <p>Esta pesquisa caracteriza-se como um estudo analítico-descritivo, fundamentado em revisão bibliográfica de artigos científicos e análise documental sobre estruturas organizacionais no setor de tecnologia. O estudo foi conduzido através da análise de literatura acadêmica que aborda modelos de gestão, com foco particular em artigos que discutem transformações estruturais em empresas tecnológicas.</p>
 
             <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=400&fit=crop" alt="Metodologia">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=400&fit=crop" alt="Pesquisa e análise">
             </div>
 
-            <p>É importante ter em mente que as informações vão depender de cada área, mas é comum que essa seção seja organizada da seguinte forma:</p>
+            <h3>Coleta de Dados</h3>
+            <p>A coleta de dados foi realizada através da seleção de artigos científicos relevantes, disponíveis em bases de dados acadêmicas e repositórios institucionais. O principal artigo analisado foi obtido do repositório da Fundação Getulio Vargas, constituindo fonte primária para compreensão das dinâmicas estruturais em organizações contemporâneas.</p>
 
+            <h3>Questões de Pesquisa</h3>
             <div class="highlight-box">
-                <p><strong>1.</strong> Descrição do objeto de estudo: sua origem, como foi encontrado, seu tamanho, tecnologias utilizadas na construção, etc</p>
-                <p style="margin-top: 0.5rem;"><strong>2.</strong> Quando necessário, a descrição do local onde o estudo foi realizado e quais eram as condições;</p>
-                <p style="margin-top: 0.5rem;"><strong>3.</strong> Como os dados foram coletados durante o experimento. Nesse caso, escreva com detalhe suficiente para que o outro pesquisador, lendo seu texto, tenha condição de repetir seu estudo;</p>
-                <p style="margin-top: 0.5rem;"><strong>4.</strong> Descrição da análise dos dados. Aqui você irá indicar qual método utilizou, como e que tipo de análise foi empregada para responder cada questão de pesquisa ou testar as hipóteses do estudo;</p>
-                <p style="margin-top: 0.5rem;"><strong>5.</strong> Por isso, você precisa ter descrito também a questão de pesquisa e as hipóteses do trabalho. Em alguns estudos com variáveis, isso também será indicado neste momento.</p>
+                <p><strong>1.</strong> Quais são as principais diferenças entre estruturas organizacionais tradicionais e inovativas no setor de tecnologia?</p>
+                <p><strong>2.</strong> Como essas diferentes estruturas impactam dimensões específicas do desempenho organizacional?</p>
+                <p><strong>3.</strong> Quais teorias administrativas podem ser aplicadas para orientar melhorias estruturais em empresas tecnológicas?</p>
             </div>
+
+            <h3>Análise dos Dados</h3>
+            <p>A análise dos dados seguiu uma abordagem qualitativa, mediante leitura crítica dos materiais selecionados, identificação de padrões e características distintivas de estruturas tradicionais e inovativas, e avaliação de impactos reportados nos estudos. A interpretação dos resultados foi conduzida à luz das teorias administrativas apresentadas na fundamentação teórica.</p>
         </div>
 
         <div id="discussao" class="section">
             <h2>4. Discussão</h2>
 
-            <p>Tem como objetivo interpretar os resultados com relação aos achados encontrados no estudo e explicar o entendimento sobre o assunto com base nos novos resultados. De certa forma, a seção de discussão estabelecerá uma ligação entre o que você falou na introdução, com as questões de pesquisa e hipóteses, e os artigos que você citou. Portanto, essa seção irá mostrar ao leitor como o estudo se desenvolveu a partir dos questionamentos deixados na introdução. Use a voz ativa sempre que possível. Cuidado com frases prolixas, seja conciso e escreva claramente.</p>
+            <p>A análise dos artigos científicos selecionados evidencia que o debate sobre estruturas organizacionais no setor de tecnologia reflete tensões fundamentais entre eficiência operacional e capacidade de inovação. Os resultados encontrados confirmam que estruturas tradicionais, embora ofereçam benefícios de controle e previsibilidade, apresentam limitações significativas em ambientes caracterizados por rápida mudança tecnológica.</p>
 
             <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=400&fit=crop" alt="Discussão">
+                <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=400&fit=crop" alt="Análise de dados">
             </div>
+
+            <h3>Velocidade de Tomada de Decisão</h3>
+            <p>Um achado relevante refere-se ao impacto da estrutura hierárquica na velocidade de tomada de decisão. Organizações com estruturas verticalizadas reportam ciclos decisórios mais longos, uma vez que aprovações precisam percorrer múltiplos níveis gerenciais. Em contraste, empresas que adotaram estruturas mais horizontais demonstram capacidade superior de responder rapidamente a oportunidades de mercado.</p>
+
+            <h3>Produção e Operações</h3>
+            <p>Quanto à dimensão de produção e operações, os estudos analisados indicam que estruturas inovativas facilitam a implementação de metodologias ágeis de desenvolvimento, permitindo iterações rápidas e incorporação contínua de feedback dos usuários. Esta flexibilidade operacional contrasta com ambientes tradicionais, onde processos rígidos podem dificultar adaptações necessárias.</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>✅ Benefícios Identificados</h4>
+                    <p>• Maior agilidade decisória</p>
+                    <p>• Aumento da inovação</p>
+                    <p>• Melhor retenção de talentos</p>
+                    <p>• Maior satisfação dos colaboradores</p>
+                    <p>• Resposta rápida ao mercado</p>
+                </div>
+                <div class="card">
+                    <h4>⚠️ Desafios Encontrados</h4>
+                    <p>• Resistência à mudança cultural</p>
+                    <p>• Possível falta de clareza de papéis</p>
+                    <p>• Necessidade de coordenação</p>
+                    <p>• Processo de transição complexo</p>
+                    <p>• Gestão de autonomia vs. controle</p>
+                </div>
+            </div>
+
+            <h3>Autonomia e Engajamento</h3>
+            <p>A questão da autonomia emerge como fator crítico para o desempenho em empresas de tecnologia. Profissionais técnicos altamente qualificados tendem a apresentar maior produtividade e satisfação quando possuem autonomia para tomar decisões relacionadas às suas áreas de especialização.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=400&fit=crop" alt="Equipe autônoma">
+            </div>
+
+            <h3>Aplicação de Teorias Administrativas</h3>
+            <p>Aplicando as teorias administrativas estudadas, é possível formular recomendações para melhoria do desempenho organizacional. A Teoria Contingencial sugere que empresas de tecnologia operando em ambientes de alta incerteza devem adotar estruturas mais orgânicas e flexíveis. A Teoria dos Sistemas reforça a importância de integração entre diferentes áreas funcionais.</p>
         </div>
 
         <div id="conclusao" class="section">
             <h2>5. Conclusão</h2>
 
-            <p>Visão geral, contribuições e limitações do trabalho.</p>
+            <p>Este estudo analisou as diferenças entre estruturas organizacionais tradicionais e inovativas no setor de tecnologia, evidenciando impactos significativos no desempenho empresarial em múltiplas dimensões. Os resultados confirmam que estruturas inovativas, caracterizadas por maior flexibilidade, horizontalização hierárquica e autonomia de equipes, apresentam vantagens competitivas relevantes em ambientes de alta volatilidade e necessidade constante de inovação.</p>
 
             <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=400&fit=crop" alt="Conclusão">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=400&fit=crop" alt="Sucesso organizacional">
+            </div>
+
+            <h3>Principais Contribuições</h3>
+            <div class="highlight-box">
+                <p><strong>1.</strong> Sistematização de evidências sobre como a estrutura organizacional influencia aspectos críticos para empresas de tecnologia</p>
+                <p><strong>2.</strong> Validação da perspectiva contingencial na escolha de modelos estruturais</p>
+                <p><strong>3.</strong> Recomendações práticas para melhoria do desempenho organizacional</p>
+            </div>
+
+            <h3>Recomendações Práticas</h3>
+            <p>As recomendações incluem a adoção de estruturas mais horizontais e flexíveis para empresas que buscam competir através de inovação e diferenciação, a implementação de mecanismos que promovam autonomia de equipes técnicas sem comprometer coordenação organizacional, e o investimento em processos de gestão de mudança para facilitar transições estruturais.</p>
+
+            <h3>Limitações e Pesquisas Futuras</h3>
+            <p>As limitações deste estudo incluem a natureza predominantemente teórica da análise, baseada em revisão bibliográfica sem coleta de dados primários em organizações específicas. Pesquisas futuras poderiam aprofundar a compreensão através de estudos de caso empíricos em empresas de tecnologia que passaram por transformações estruturais.</p>
+
+            <div class="highlight-box">
+                <strong>Conclusão Final:</strong> A escolha da estrutura organizacional representa decisão estratégica fundamental para empresas de tecnologia, com impactos diretos e mensuráveis no desempenho organizacional. O sucesso neste setor cada vez mais competitivo depende da capacidade de adotar configurações estruturais que equilibrem eficiência operacional com flexibilidade e capacidade de inovação.
             </div>
         </div>
 
         <div id="referencias" class="section">
             <h2>Referências</h2>
 
-            <div class="highlight-box">
-                <p><strong>Formato para Livros:</strong></p>
-                <p style="margin-left: 1rem;">SOBRENOME, Nome Abreviado. <strong>Título:</strong> subtítulo. Edição. Local de publicação: Editora, data de publicação da obra.</p>
+            <div class="references">
+                <p><strong>CENTRO DE ESTUDOS EM GESTÃO.</strong> Estruturas organizacionais e desempenho empresarial. <strong>Repositório FGV</strong>, 2024. Disponível em: https://repositorio.fgv.br/items/f61cc199-6b65-4312-b1dc-8b1e16f13580. Acesso em: 6 out. 2025.</p>
             </div>
 
-            <div class="highlight-box" style="margin-top: 1.5rem;">
-                <p><strong>Formato para Sites:</strong></p>
-                <p style="margin-left: 1rem; margin-top: 0.5rem;"><strong>Com autor:</strong> SOBRENOME, Nome. Título da matéria. <strong>Nome do site</strong>, ano. Disponível em: &lt;URL&gt;. Acesso em: dia, mês e ano.</p>
-                <p style="margin-left: 1rem; margin-top: 0.5rem;"><strong>Sem autor:</strong> TÍTULO da matéria. <strong>Nome do site</strong>, ano. Disponível em: &lt;URL&gt;. Acesso em: dia, mês e ano.</p>
+            <div class="references">
+                <p><strong>CHIAVENATO, Idalberto.</strong> <em>Introdução à teoria geral da administração.</em> 9. ed. São Paulo: Manole, 2014.</p>
             </div>
 
-            <div class="highlight-box" style="margin-top: 1.5rem;">
-                <p><strong>Formato para Artigo Científico:</strong></p>
-                <p style="margin-left: 1rem;">SOBRENOME, Nome(s) abreviado(s). Título do artigo. <strong>Título da Revista</strong>, local de publicação, volume do exemplar, número do exemplar, p. (página inicial e final do artigo), mês, ano de publicação. Disponível em: link. Acesso em: data de acesso.</p>
+            <div class="references">
+                <p><strong>DAFT, Richard L.</strong> <em>Organizações: teoria e projetos.</em> 11. ed. São Paulo: Cengage Learning, 2015.</p>
+            </div>
+
+            <div class="references">
+                <p><strong>MINTZBERG, Henry.</strong> <em>Criando organizações eficazes: estruturas em cinco configurações.</em> 2. ed. São Paulo: Atlas, 2003.</p>
+            </div>
+
+            <div class="references">
+                <p><strong>ROBBINS, Stephen P.; JUDGE, Timothy A.; SOBRAL, Filipe.</strong> <em>Comportamento organizacional: teoria e prática no contexto brasileiro.</em> 14. ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+            </div>
+
+            <div class="references">
+                <p><strong>SOBRAL, Filipe; PECI, Alketa.</strong> <em>Administração: teoria e prática no contexto brasileiro.</em> 2. ed. São Paulo: Pearson Education do Brasil, 2013.</p>
             </div>
 
             <div class="image-container" style="margin-top: 3rem;">
-                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=300&fit=crop" alt="Biblioteca">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=300&fit=crop" alt="Biblioteca e livros">
             </div>
         </div>
     </div>
@@ -501,22 +637,25 @@
     <footer class="footer">
         <div class="container">
             <p><strong>FATEC - Faculdade de Tecnologia de Ribeirão Preto</strong></p>
-            <p>Trabalho Acadêmico | 2025</p>
+            <p>Trabalho de Administração Geral | 1º Bimestre 2025</p>
             <p style="margin-top: 1rem; opacity: 0.8;">© 2025 - Todos os direitos reservados</p>
         </div>
     </footer>
 
     <script>
         function showSection(sectionId) {
+            // Remove active class from all sections and buttons
             const sections = document.querySelectorAll('.section');
             const buttons = document.querySelectorAll('.nav-tabs button');
             
             sections.forEach(section => section.classList.remove('active'));
             buttons.forEach(button => button.classList.remove('active'));
             
+            // Add active class to selected section and button
             document.getElementById(sectionId).classList.add('active');
             event.target.classList.add('active');
             
+            // Mantém a posição no nível dos botões com mais margem superior
             const navTabs = document.querySelector('.nav-tabs');
             const navPosition = navTabs.getBoundingClientRect().top + window.pageYOffset - 150;
             
@@ -526,6 +665,7 @@
             });
         }
 
+        // Scroll to top button functionality
         window.addEventListener('scroll', function() {
             const scrollTop = document.getElementById('scrollTop');
             if (window.pageYOffset > 300) {
@@ -538,6 +678,40 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Add smooth scrolling for all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and images
+        document.querySelectorAll('.card, .image-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
