@@ -389,6 +389,14 @@
                 padding: 1rem;
                 background: var(--white);
                 border-bottom: 3px solid var(--fatec-red);
+                position: sticky;
+                top: 0;
+                z-index: 998;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-nav-header.fixed-header {
+                box-shadow: 0 6px 16px rgba(0,0,0,0.25);
             }
 
             .mobile-current-section {
@@ -872,15 +880,28 @@
                 scrollTop.classList.remove('visible');
             }
 
-            // Detecta quando o menu realmente fica fixo no topo da tela
-            const navTabs = document.querySelector('.nav-tabs');
-            const navRect = navTabs.getBoundingClientRect();
-            
-            // Quando o menu está exatamente no topo (top = 0), adiciona a classe
-            if (navRect.top <= 0) {
-                navTabs.classList.add('fixed-header');
+            // Desktop: Detecta quando o menu realmente fica fixo no topo da tela
+            if (window.innerWidth > 768) {
+                const navTabs = document.querySelector('.nav-tabs');
+                const navRect = navTabs.getBoundingClientRect();
+                
+                if (navRect.top <= 0) {
+                    navTabs.classList.add('fixed-header');
+                } else {
+                    navTabs.classList.remove('fixed-header');
+                }
             } else {
-                navTabs.classList.remove('fixed-header');
+                // Mobile: Detecta quando o header mobile fica fixo no topo
+                const mobileHeader = document.querySelector('.mobile-nav-header');
+                if (mobileHeader) {
+                    const headerRect = mobileHeader.getBoundingClientRect();
+                    
+                    if (headerRect.top <= 0) {
+                        mobileHeader.classList.add('fixed-header');
+                    } else {
+                        mobileHeader.classList.remove('fixed-header');
+                    }
+                }
             }
         });
 
