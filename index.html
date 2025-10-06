@@ -32,8 +32,7 @@
             color: var(--white);
             padding: 1rem 0;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 1000;
         }
 
@@ -111,6 +110,23 @@
             margin: 2rem 0 1.5rem 0;
             flex-wrap: wrap;
             justify-content: center;
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 1rem 0.5rem;
+            z-index: 999;
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-bottom: 3px solid var(--fatec-red);
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs.fixed-header {
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
         }
 
         .nav-tabs button {
@@ -136,11 +152,12 @@
         .section {
             background: var(--white);
             padding: 2rem;
-            margin: 1.5rem 0;
+            margin: 0 0 1.5rem 0;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: none;
             animation: fadeIn 0.5s ease;
+            scroll-margin-top: 120px;
         }
 
         .section.active {
@@ -359,6 +376,13 @@
             .nav-tabs {
                 flex-direction: column;
                 margin: 1.5rem 0 1rem 0;
+                top: 0;
+                padding: 0.8rem 0.5rem;
+            }
+
+            .nav-tabs.fixed-header {
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
 
             .nav-tabs button {
@@ -707,15 +731,20 @@
             buttons.forEach(button => button.classList.remove('active'));
             
             // Add active class to selected section and button
-            document.getElementById(sectionId).classList.add('active');
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
             event.target.classList.add('active');
             
-            // Mantém a posição no nível dos botões com mais margem superior
+            // Pega a altura do menu fixo + uma margem
             const navTabs = document.querySelector('.nav-tabs');
-            const navPosition = navTabs.getBoundingClientRect().top + window.pageYOffset - 120;
+            const menuHeight = navTabs.offsetHeight + 20; // 20px de margem extra
             
+            // Pega a posição da seção
+            const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+            
+            // Rola para a seção considerando a altura do menu
             window.scrollTo({ 
-                top: navPosition, 
+                top: sectionPosition - menuHeight,
                 behavior: 'smooth' 
             });
         }
@@ -727,6 +756,17 @@
                 scrollTop.classList.add('visible');
             } else {
                 scrollTop.classList.remove('visible');
+            }
+
+            // Detecta quando o menu realmente fica fixo no topo da tela
+            const navTabs = document.querySelector('.nav-tabs');
+            const navRect = navTabs.getBoundingClientRect();
+            
+            // Quando o menu está exatamente no topo (top = 0), adiciona a classe
+            if (navRect.top <= 0) {
+                navTabs.classList.add('fixed-header');
+            } else {
+                navTabs.classList.remove('fixed-header');
             }
         });
 
