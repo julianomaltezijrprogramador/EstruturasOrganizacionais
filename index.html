@@ -12,10 +12,11 @@
         }
 
         :root {
-            --fatec-red: #6BA3D8;
-            --fatec-dark-red: #4A8BC2;
+            --fatec-red: #5B2EFF;
+            --fatec-dark-red: #4A00B5;
+            --fatec-accent: #00C4CC;
             --fatec-gray: #333333;
-            --fatec-light-gray: #F5F9FC;
+            --fatec-light-gray: #F5F7FA;
             --text-color: #2C2C2C;
             --white: #FFFFFF;
         }
@@ -78,7 +79,7 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, rgba(107,163,216,0.95) 0%, rgba(74,139,194,0.95) 100%),
+            background: linear-gradient(135deg, rgba(91,46,255,0.95) 0%, rgba(74,0,181,0.95) 100%),
                         url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=400&fit=crop') center/cover;
             color: var(--white);
             padding: 6rem 0;
@@ -204,12 +205,13 @@
         }
 
         .keyword {
-            background: var(--fatec-red);
+            background: linear-gradient(135deg, var(--fatec-red) 0%, var(--fatec-dark-red) 100%);
             color: var(--white);
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
+            box-shadow: 0 2px 8px rgba(91,46,255,0.3);
         }
 
         .footer {
@@ -255,7 +257,7 @@
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, rgba(139,0,0,0.1) 0%, rgba(107,0,0,0.05) 100%);
+            background: linear-gradient(135deg, rgba(91,46,255,0.08) 0%, rgba(0,196,204,0.08) 100%);
             border: 2px solid var(--fatec-red);
             border-radius: 10px;
             padding: 2rem;
@@ -302,7 +304,7 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--fatec-red);
+            background: linear-gradient(135deg, var(--fatec-red) 0%, var(--fatec-dark-red) 100%);
             color: var(--white);
             width: 50px;
             height: 50px;
@@ -311,7 +313,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+            box-shadow: 0 4px 12px rgba(91,46,255,0.4);
             transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
@@ -323,8 +325,9 @@
         }
 
         .scroll-top:hover {
-            background: var(--fatec-dark-red);
+            background: linear-gradient(135deg, var(--fatec-accent) 0%, #00A8B0 100%);
             transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,196,204,0.5);
         }
     </style>
 </head>
