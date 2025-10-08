@@ -119,6 +119,15 @@
             border-radius: 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             border-bottom: 3px solid var(--fatec-red);
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs.fixed-header {
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
         }
 
         .mobile-nav-header {
@@ -126,6 +135,10 @@
         }
 
         .hamburger-menu {
+            display: none;
+        }
+
+        .menu-overlay {
             display: none;
         }
 
@@ -157,6 +170,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: none;
             animation: fadeIn 0.5s ease;
+            scroll-margin-top: 120px;
         }
 
         .section.active {
@@ -376,6 +390,10 @@
                 font-size: 1rem;
             }
 
+            .section ul {
+                font-size: 1rem;
+            }
+
             .mobile-nav-header {
                 display: flex;
                 justify-content: space-between;
@@ -386,10 +404,15 @@
                 position: sticky;
                 top: 0;
                 z-index: 998;
+                transition: all 0.3s ease;
                 margin-left: -1rem;
                 margin-right: -1rem;
                 padding-left: 2rem;
                 padding-right: 2rem;
+            }
+
+            .mobile-nav-header.fixed-header {
+                box-shadow: 0 6px 16px rgba(0,0,0,0.25);
             }
 
             .mobile-current-section {
@@ -413,6 +436,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                transition: all 0.3s ease;
+            }
+
+            .hamburger-menu:active {
+                transform: scale(0.95);
             }
 
             .nav-tabs {
@@ -462,6 +490,10 @@
             }
 
             .authors ul {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
                 grid-template-columns: 1fr;
             }
         }
@@ -869,14 +901,30 @@
                 toggleMenu();
             }
             
-            const navTabs = document.querySelector('.nav-tabs');
-            const menuHeight = navTabs.offsetHeight + 20;
-            const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
-            
-            window.scrollTo({ 
-                top: sectionPosition - menuHeight,
-                behavior: 'smooth' 
-            });
+            // Aguarda um pouco para o menu fechar antes de rolar
+            setTimeout(() => {
+                // Considera a altura do header mobile se estiver em mobile
+                let headerOffset = 20;
+                
+                if (window.innerWidth <= 768) {
+                    const mobileHeader = document.querySelector('.mobile-nav-header');
+                    if (mobileHeader) {
+                        headerOffset = mobileHeader.offsetHeight + 20;
+                    }
+                } else {
+                    const navTabs = document.querySelector('.nav-tabs');
+                    if (navTabs) {
+                        headerOffset = navTabs.offsetHeight + 20;
+                    }
+                }
+                
+                const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+                
+                window.scrollTo({ 
+                    top: sectionPosition - headerOffset,
+                    behavior: 'smooth' 
+                });
+            }, window.innerWidth <= 768 ? 300 : 0); // Aguarda 300ms no mobile para o menu fechar
         }
 
         window.addEventListener('scroll', function() {
@@ -885,6 +933,30 @@
                 scrollTop.classList.add('visible');
             } else {
                 scrollTop.classList.remove('visible');
+            }
+
+            // Desktop: Detecta quando o menu fica fixo no topo
+            if (window.innerWidth > 768) {
+                const navTabs = document.querySelector('.nav-tabs');
+                const navRect = navTabs.getBoundingClientRect();
+                
+                if (navRect.top <= 0) {
+                    navTabs.classList.add('fixed-header');
+                } else {
+                    navTabs.classList.remove('fixed-header');
+                }
+            } else {
+                // Mobile: Detecta quando o header mobile fica fixo
+                const mobileHeader = document.querySelector('.mobile-nav-header');
+                if (mobileHeader) {
+                    const headerRect = mobileHeader.getBoundingClientRect();
+                    
+                    if (headerRect.top <= 0) {
+                        mobileHeader.classList.add('fixed-header');
+                    } else {
+                        mobileHeader.classList.remove('fixed-header');
+                    }
+                }
             }
         });
 
@@ -900,6 +972,29 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        });
+
+        // Adiciona animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observa todos os cards e imagens para animação
+        document.querySelectorAll('.card, .highlight-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
