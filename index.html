@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estruturas Organizacionais em TI | FATEC Ribeirão Preto</title>
+    <title>Estruturas Organizacionais | FATEC Ribeirão Preto</title>
     <style>
         * {
             margin: 0;
@@ -79,7 +79,7 @@
 
         .hero {
             background: linear-gradient(135deg, rgba(139,0,0,0.95) 0%, rgba(107,0,0,0.95) 100%),
-                        url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=400&fit=crop') center/cover;
+                        url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=400&fit=crop') center/cover;
             color: var(--white);
             padding: 3rem 2rem;
             margin-top: 1.5rem;
@@ -99,10 +99,9 @@
 
         .hero p {
             font-size: 1.1rem;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             opacity: 0.95;
-            line-height: 1.8;
         }
 
         .nav-tabs {
@@ -135,10 +134,6 @@
         }
 
         .hamburger-menu {
-            display: none;
-        }
-
-        .menu-overlay {
             display: none;
         }
 
@@ -198,7 +193,7 @@
 
         .section h3 {
             color: var(--fatec-dark-red);
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin: 2rem 0 1rem 0;
         }
 
@@ -209,50 +204,22 @@
             line-height: 1.8;
         }
 
-        .authors {
-            background: var(--fatec-light-gray);
-            padding: 2rem;
-            border-radius: 10px;
+        .image-container {
             margin: 2rem 0;
-        }
-
-        .authors h3 {
-            color: var(--fatec-red);
-            margin-bottom: 1rem;
-        }
-
-        .authors ul {
-            list-style: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 0.5rem;
-        }
-
-        .authors li {
-            padding: 0.5rem 0;
-            font-size: 1.05rem;
-            color: var(--text-color);
-        }
-
-        .authors li:before {
-            content: "▪ ";
-            color: var(--fatec-red);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(139,0,0,0.1) 0%, rgba(107,0,0,0.05) 100%);
-            border: 2px solid var(--fatec-red);
             border-radius: 10px;
-            padding: 2rem;
-            margin: 2rem 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .highlight-box strong {
-            color: var(--fatec-red);
-            font-size: 1.1rem;
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
         }
 
         .grid-2 {
@@ -281,9 +248,20 @@
             margin-bottom: 1rem;
         }
 
-        .card p {
-            text-align: left;
-            margin-bottom: 0.8rem;
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .keyword {
+            background: var(--fatec-red);
+            color: var(--white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .references {
@@ -311,34 +289,47 @@
             margin-bottom: 0.5rem;
         }
 
-        .scroll-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--fatec-red);
-            color: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            font-size: 1.5rem;
+        .authors {
+            background: var(--fatec-light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
         }
 
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
+        .authors h3 {
+            color: var(--fatec-red);
+            margin-bottom: 1rem;
         }
 
-        .scroll-top:hover {
-            background: var(--fatec-dark-red);
-            transform: translateY(-5px);
+        .authors ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .authors li {
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .authors li:before {
+            content: "▪ ";
+            color: var(--fatec-red);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139,0,0,0.1) 0%, rgba(107,0,0,0.05) 100%);
+            border: 2px solid var(--fatec-red);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box strong {
+            color: var(--fatec-red);
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
@@ -390,10 +381,7 @@
                 font-size: 1rem;
             }
 
-            .section ul {
-                font-size: 1rem;
-            }
-
+            /* Mobile Navigation */
             .mobile-nav-header {
                 display: flex;
                 justify-content: space-between;
@@ -485,17 +473,63 @@
                 display: block;
             }
 
+            .nav-tabs.fixed-header {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card h4 {
+                font-size: 1.2rem;
+            }
+
+            .authors {
+                padding: 1.5rem;
+            }
+
+            .authors li {
+                font-size: 1rem;
+            }
+
+            .highlight-box {
+                padding: 1.5rem;
+            }
+
             .container {
                 padding: 0 1rem;
             }
+        }
 
-            .authors ul {
-                grid-template-columns: 1fr;
-            }
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--fatec-red);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
 
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--fatec-dark-red);
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -505,23 +539,25 @@
             <div class="logo">FATEC</div>
             <div class="header-text">
                 <h1>FATEC - Ribeirão Preto</h1>
-                <p>Estruturas Organizacionais em Tecnologia | 2025</p>
+                <p>Trabalho de Administração Geral | 1º Bimestre 2025</p>
             </div>
         </div>
     </header>
 
     <div class="container">
         <div class="mobile-nav-header">
-            <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
-            <div class="mobile-current-section" id="currentSection">Introdução</div>
+            <button class="hamburger-menu" onclick="toggleMenu()" aria-label="Menu">
+                ☰
+            </button>
+            <div class="mobile-current-section" id="currentSection">Resumo</div>
         </div>
 
         <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
         <div class="hero">
             <div class="hero-content">
-                <h2>Análise da Relação entre Estrutura Organizacional e Desempenho Operacional</h2>
-                <p>na Prestação de Serviços de TI de Alto Valor Agregado</p>
+                <h2>Estruturas Organizacionais</h2>
+                <p>Análise de Impactos no Desempenho de Empresas de Tecnologia</p>
             </div>
         </div>
 
@@ -529,346 +565,266 @@
             <h3>Autores do Trabalho</h3>
             <ul>
                 <li>Antenor Hugo Pereira Fiuza</li>
-                <li>Juliano Júnior</li>
-                <li>Leandro de Souza Sertório</li>
+                <li>Juliano Rocha Maltezi Junior</li>
+                <li>Leandro de Souza Sertorio</li>
                 <li>Lucas Malheiros</li>
-                <li>Pedro Aquino</li>
-                <li>Pedro Lucas Araujo da Silva</li>
+                <li>Pedro Henrique de Aquino Soares</li>
+                <li>Pedro Lucas Arcanjo</li>
             </ul>
-            <p style="margin-top: 1.5rem; font-style: italic; color: var(--fatec-gray); text-align: center;">
-                <strong>Orientadora:</strong> Profª Drª Suzana Márcia Marangoni<br>
-                Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas
+            <p style="margin-top: 1rem; font-style: italic; color: var(--fatec-gray);">
+                Profª Suzana Marcia Morangoni | Tecnologia em Análise e Desenvolvimento de Sistemas
             </p>
         </div>
 
         <div class="nav-tabs">
-            <button class="active" onclick="showSection('introducao')">Introdução</button>
-            <button onclick="showSection('justificativa')">Justificativa</button>
+            <button class="active" onclick="showSection('resumo')">Resumo</button>
+            <button onclick="showSection('introducao')">Introdução</button>
+            <button onclick="showSection('fundamentacao')">Fundamentação Teórica</button>
             <button onclick="showSection('metodologia')">Metodologia</button>
-            <button onclick="showSection('resultados')">Resultados</button>
-            <button onclick="showSection('administracao')">Relação com Adm. Geral</button>
+            <button onclick="showSection('discussao')">Discussão</button>
             <button onclick="showSection('conclusao')">Conclusão</button>
             <button onclick="showSection('referencias')">Referências</button>
         </div>
 
-        <div id="introducao" class="section active">
-            <h2>Introdução</h2>
+        <div id="resumo" class="section active">
+            <h2>Resumo</h2>
+            <p>Este estudo analisa as diferentes estruturas organizacionais presentes em empresas do setor de tecnologia, identificando características de estruturas tradicionais e inovativas e seus respectivos impactos no desempenho organizacional. A pesquisa fundamenta-se na análise de artigos científicos que abordam modelos de gestão contemporâneos, com foco especial nas transformações estruturais necessárias para empresas que buscam maior agilidade e competitividade.</p>
             
-            <p>O avanço constante da tecnologia e a crescente dependência das empresas em relação a soluções digitais têm transformado profundamente a forma como as organizações estruturam seus processos internos e prestam serviços. Nesse contexto, a área de Tecnologia da Informação (TI) deixou de ser apenas um suporte operacional e passou a desempenhar papel estratégico na busca por eficiência e competitividade.</p>
-
-            <p>O artigo <strong>"Análise da Relação entre a Estrutura Organizacional e o Desempenho Operacional na Prestação de Serviços de TI de Alto Valor Agregado"</strong>, de Carlos Giovani Giraldeli e Djair Picchiai, investiga como diferentes modelos de estrutura organizacional influenciam o desempenho operacional na prestação de serviços de TI. O estudo foi conduzido por meio de um estudo de caso qualitativo, analisando quatro projetos distintos de uma empresa de grande porte do setor de tecnologia.</p>
-
-            <div class="highlight-box">
-                <strong>Questão Central:</strong> Quais tipos de estruturas organizacionais — mais rígidas e hierárquicas ou mais flexíveis e colaborativas — proporcionam maior eficiência e satisfação aos clientes na prestação de serviços de TI?
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=400&fit=crop" alt="Equipe de tecnologia trabalhando">
             </div>
 
-            <p>A introdução do artigo destaca que, diante das rápidas mudanças tecnológicas e das novas formas de contratação de serviços de TI, torna-se essencial compreender quais configurações estruturais são mais adequadas para diferentes contextos organizacionais.</p>
+            <p>Observa-se que estruturas tradicionais, caracterizadas por hierarquias rígidas e centralização de poder, apresentam limitações significativas em ambientes dinâmicos e de rápida inovação tecnológica. Por outro lado, estruturas inovativas, baseadas em maior autonomia, equipes multifuncionais e descentralização decisória, demonstram melhor adaptação às demandas do mercado tecnológico atual.</p>
+            
+            <p>A análise evidencia que a escolha da estrutura organizacional impacta diretamente aspectos como produtividade, inovação, satisfação dos colaboradores e capacidade de resposta estratégica. Aplicando teorias administrativas clássicas e contemporâneas, o estudo propõe recomendações para otimização do desempenho organizacional no contexto tecnológico.</p>
 
-            <p>Assim, este trabalho busca compreender as principais ideias apresentadas pelos autores e relacionar suas conclusões com os conceitos estudados em Administração Geral, evidenciando a importância da estrutura organizacional na gestão de empresas voltadas à tecnologia.</p>
+            <div class="keywords">
+                <span class="keyword">estruturas organizacionais</span>
+                <span class="keyword">empresas de tecnologia</span>
+                <span class="keyword">estruturas inovativas</span>
+                <span class="keyword">desempenho organizacional</span>
+                <span class="keyword">gestão estratégica</span>
+            </div>
         </div>
 
-        <div id="justificativa" class="section">
-            <h2>Justificativa</h2>
+        <div id="introducao" class="section">
+            <h2>1. Introdução</h2>
+            
+            <div class="highlight-box">
+                <strong>Problema de Pesquisa:</strong> Como as diferentes estruturas organizacionais impactam o desempenho de empresas de tecnologia em aspectos como produção, hierarquia, autonomia, estratégia e trabalho em equipe?
+            </div>
 
-            <p>A escolha deste artigo para o trabalho de Administração Geral se deve à sua forte relação entre os princípios da administração e a área de tecnologia da informação, central no curso de Análise e Desenvolvimento de Sistemas.</p>
+            <p>A estrutura organizacional representa um dos elementos fundamentais para o sucesso empresarial, especialmente em setores caracterizados por alta competitividade e constante transformação, como o de tecnologia. A forma como uma organização define sua hierarquia, distribui autoridade e estabelece canais de comunicação influencia diretamente sua capacidade de inovar, adaptar-se às mudanças do mercado e atingir objetivos estratégicos.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop" alt="Estrutura organizacional">
+            </div>
+
+            <p>No contexto atual, empresas de tecnologia enfrentam desafios únicos que questionam a eficácia de modelos tradicionais de gestão. A velocidade das inovações tecnológicas, a necessidade de respostas ágeis às demandas do mercado e a importância do capital intelectual exigem estruturas mais flexíveis e colaborativas. Segundo estudos recentes, organizações que adotam estruturas inovativas tendem a apresentar melhor desempenho em indicadores como capacidade de inovação, engajamento de colaboradores e resultados financeiros.</p>
+
+            <p>Este trabalho tem como objetivo analisar as diferenças entre estruturas organizacionais tradicionais e inovativas no setor de tecnologia, identificando seus impactos em diferentes dimensões do desempenho empresarial. A relevância desta pesquisa reside na necessidade de compreender quais configurações estruturais são mais adequadas para organizações que operam em ambientes de alta incerteza e dinamismo tecnológico.</p>
 
             <div class="highlight-box">
-                <p>O estudo mostra, de forma prática, como <strong>conceitos administrativos</strong> — como estrutura organizacional, desempenho e eficiência — influenciam diretamente o sucesso dos serviços de TI.</p>
+                <strong>Objetivo Geral:</strong> Analisar os efeitos das estruturas organizacionais tradicionais e inovativas no desempenho de empresas do setor tecnológico, propondo recomendações baseadas em teorias administrativas para melhoria da gestão organizacional.
+            </div>
+        </div>
+
+        <div id="fundamentacao" class="section">
+            <h2>2. Fundamentação Teórica</h2>
+
+            <h3>2.1 Estruturas Organizacionais: Conceitos Fundamentais</h3>
+            <p>A estrutura organizacional pode ser compreendida como o conjunto de relações formais entre os diversos grupos e indivíduos que compõem uma organização. Ela define a divisão de trabalho, estabelece níveis hierárquicos, determina canais de comunicação e especifica responsabilidades e autoridades. A escolha da estrutura organizacional adequada representa uma decisão estratégica que influencia diretamente a eficiência operacional e a capacidade de alcançar objetivos empresariais.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=400&fit=crop" alt="Organograma e estrutura">
             </div>
 
-            <p>Também destaca que a eficiência técnica depende não apenas do conhecimento, mas de <strong>boa gestão de pessoas, processos e hierarquias</strong>.</p>
+            <p>As teorias clássicas da administração, desenvolvidas por autores como Henri Fayol e Frederick Taylor, enfatizavam a importância da hierarquia clara, da divisão especializada do trabalho e da unidade de comando. Esses princípios deram origem às estruturas tradicionais, caracterizadas por múltiplos níveis hierárquicos, centralização decisória e departamentalização funcional.</p>
 
-            <h3>Relevância para o Curso de ADS</h3>
-            <p>Essa conexão entre teoria administrativa e prática tecnológica é especialmente relevante para estudantes de ADS, pois evidencia que um profissional completo deve unir <strong>competências técnicas e gerenciais</strong> para administrar melhor projetos, equipes e serviços de tecnologia, alcançando resultados mais eficazes e sustentáveis.</p>
-
+            <h3>2.2 Estruturas Tradicionais vs. Inovativas</h3>
+            
             <div class="grid-2">
                 <div class="card">
-                    <h4>💼 Visão Administrativa</h4>
-                    <p>• Estruturas organizacionais</p>
-                    <p>• Gestão de pessoas</p>
-                    <p>• Processos e hierarquias</p>
-                    <p>• Desempenho operacional</p>
+                    <h4>📊 Estruturas Tradicionais</h4>
+                    <p>• Hierarquia verticalizada</p>
+                    <p>• Centralização do poder decisório</p>
+                    <p>• Comunicação vertical</p>
+                    <p>• Divisão rígida de tarefas</p>
+                    <p>• Formalização de processos</p>
                 </div>
                 <div class="card">
-                    <h4>💻 Visão Tecnológica</h4>
-                    <p>• Serviços de TI</p>
-                    <p>• Projetos de software</p>
-                    <p>• Equipes técnicas</p>
-                    <p>• Inovação e eficiência</p>
+                    <h4>🚀 Estruturas Inovativas</h4>
+                    <p>• Horizontalização hierárquica</p>
+                    <p>• Descentralização decisória</p>
+                    <p>• Comunicação multidirecional</p>
+                    <p>• Autonomia de equipes</p>
+                    <p>• Flexibilidade e adaptação</p>
                 </div>
             </div>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=400&fit=crop" alt="Equipe colaborativa">
+            </div>
+
+            <h3>2.3 Impactos no Desempenho Organizacional</h3>
+            <p>A estrutura organizacional influencia múltiplas dimensões do desempenho empresarial. Na produção e operações, estruturas tradicionais podem oferecer maior previsibilidade e controle de qualidade através de processos padronizados, enquanto estruturas inovativas tendem a proporcionar maior flexibilidade para adaptação de processos e customização de produtos.</p>
+
+            <p>Quanto à autonomia dos colaboradores, em modelos tradicionais ela é limitada por procedimentos rígidos, enquanto estruturas inovativas promovem maior empowerment, resultando em maior satisfação profissional e capacidade de inovação.</p>
+
+            <h3>2.4 Teorias Administrativas Aplicáveis</h3>
+            <p>A Teoria Contingencial enfatiza que não existe uma estrutura ideal universal, mas sim configurações mais adequadas a contextos específicos. Para empresas de tecnologia, esta teoria sugere que a estrutura deve ser contingente ao nível de incerteza do ambiente, complexidade tecnológica e estratégia competitiva adotada.</p>
+
+            <p>A Teoria dos Sistemas proporciona uma visão holística da organização, reconhecendo a interdependência entre diferentes componentes estruturais. Esta perspectiva é particularmente relevante para empresas de tecnologia, onde a integração entre áreas é fundamental para o sucesso.</p>
         </div>
 
         <div id="metodologia" class="section">
-            <h2>Metodologia do Estudo</h2>
+            <h2>3. Metodologia</h2>
 
-            <p>A metodologia adotada no artigo foi um <strong>estudo de caso de natureza qualitativa e aprofundada</strong>, investigando a relação entre a estrutura organizacional de TI e o desempenho operacional em quatro empresas. A análise se baseia em três pilares principais:</p>
+            <p>Esta pesquisa caracteriza-se como um estudo analítico-descritivo, fundamentado em revisão bibliográfica de artigos científicos e análise documental sobre estruturas organizacionais no setor de tecnologia. O estudo foi conduzido através da análise de literatura acadêmica que aborda modelos de gestão, com foco particular em artigos que discutem transformações estruturais em empresas tecnológicas.</p>
 
-            <h3>1. Classificação dos Clientes e Estruturas Organizacionais</h3>
-            
-            <p>Os clientes são classificados em duas categorias, que determinam as estruturas organizacionais de TI adotadas:</p>
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=400&fit=crop" alt="Pesquisa e análise">
+            </div>
+
+            <h3>Coleta de Dados</h3>
+            <p>A coleta de dados foi realizada através da seleção de artigos científicos relevantes, disponíveis em bases de dados acadêmicas e repositórios institucionais. O principal artigo analisado foi obtido do repositório da Fundação Getulio Vargas, constituindo fonte primária para compreensão das dinâmicas estruturais em organizações contemporâneas.</p>
+
+            <h3>Questões de Pesquisa</h3>
+            <div class="highlight-box">
+                <p><strong>1.</strong> Quais são as principais diferenças entre estruturas organizacionais tradicionais e inovativas no setor de tecnologia?</p>
+                <p><strong>2.</strong> Como essas diferentes estruturas impactam dimensões específicas do desempenho organizacional?</p>
+                <p><strong>3.</strong> Quais teorias administrativas podem ser aplicadas para orientar melhorias estruturais em empresas tecnológicas?</p>
+            </div>
+
+            <h3>Análise dos Dados</h3>
+            <p>A análise dos dados seguiu uma abordagem qualitativa, mediante leitura crítica dos materiais selecionados, identificação de padrões e características distintivas de estruturas tradicionais e inovativas, e avaliação de impactos reportados nos estudos. A interpretação dos resultados foi conduzida à luz das teorias administrativas apresentadas na fundamentação teórica.</p>
+        </div>
+
+        <div id="discussao" class="section">
+            <h2>4. Discussão</h2>
+
+            <p>A análise dos artigos científicos selecionados evidencia que o debate sobre estruturas organizacionais no setor de tecnologia reflete tensões fundamentais entre eficiência operacional e capacidade de inovação. Os resultados encontrados confirmam que estruturas tradicionais, embora ofereçam benefícios de controle e previsibilidade, apresentam limitações significativas em ambientes caracterizados por rápida mudança tecnológica.</p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=400&fit=crop" alt="Análise de dados">
+            </div>
+
+            <h3>Velocidade de Tomada de Decisão</h3>
+            <p>Um achado relevante refere-se ao impacto da estrutura hierárquica na velocidade de tomada de decisão. Organizações com estruturas verticalizadas reportam ciclos decisórios mais longos, uma vez que aprovações precisam percorrer múltiplos níveis gerenciais. Em contraste, empresas que adotaram estruturas mais horizontais demonstram capacidade superior de responder rapidamente a oportunidades de mercado.</p>
+
+            <h3>Produção e Operações</h3>
+            <p>Quanto à dimensão de produção e operações, os estudos analisados indicam que estruturas inovativas facilitam a implementação de metodologias ágeis de desenvolvimento, permitindo iterações rápidas e incorporação contínua de feedback dos usuários. Esta flexibilidade operacional contrasta com ambientes tradicionais, onde processos rígidos podem dificultar adaptações necessárias.</p>
 
             <div class="grid-2">
                 <div class="card">
-                    <h4>🏢 Core Business Dependente de TI</h4>
-                    <p>Requerem equipes especializadas e maduras, com o objetivo de garantir a eficiência da tecnologia que é central para o negócio.</p>
+                    <h4>✅ Benefícios Identificados</h4>
+                    <p>• Maior agilidade decisória</p>
+                    <p>• Aumento da inovação</p>
+                    <p>• Melhor retenção de talentos</p>
+                    <p>• Maior satisfação dos colaboradores</p>
+                    <p>• Resposta rápida ao mercado</p>
                 </div>
                 <div class="card">
-                    <h4>🏭 Core Business NÃO Dependente de TI</h4>
-                    <p>Buscam a redução de custos e contam com equipes de menor maturidade.</p>
+                    <h4>⚠️ Desafios Encontrados</h4>
+                    <p>• Resistência à mudança cultural</p>
+                    <p>• Possível falta de clareza de papéis</p>
+                    <p>• Necessidade de coordenação</p>
+                    <p>• Processo de transição complexo</p>
+                    <p>• Gestão de autonomia vs. controle</p>
                 </div>
             </div>
 
-            <p>Para isso, a pesquisa utiliza o levantamento do perfil da <strong>pirâmide de maturidade</strong> (Juniores, Plenos e Seniores) das equipes de TI.</p>
+            <h3>Autonomia e Engajamento</h3>
+            <p>A questão da autonomia emerge como fator crítico para o desempenho em empresas de tecnologia. Profissionais técnicos altamente qualificados tendem a apresentar maior produtividade e satisfação quando possuem autonomia para tomar decisões relacionadas às suas áreas de especialização.</p>
 
-            <h3>2. Avaliação de Desempenho</h3>
-            
-            <p>A metodologia utiliza <strong>indicadores de performance</strong>, como o Tempo Médio de Atendimento (TMA), para medir a eficiência, comparando-o com os acordos de nível de serviço (ANS).</p>
-
-            <p>Além das métricas quantitativas, a <strong>opinião dos clientes</strong> é coletada por meio de pesquisas qualitativas, que avaliam:</p>
-            <ul style="list-style: none; padding-left: 1rem;">
-                <li>✓ Percepção sobre a qualidade do atendimento</li>
-                <li>✓ Competência técnica</li>
-                <li>✓ Esforço necessário</li>
-                <li>✓ Satisfação geral</li>
-            </ul>
-
-            <h3>3. Limitações</h3>
-            
-            <div class="highlight-box">
-                O estudo reconhece suas limitações, destacando que a complexidade do tema não é totalmente capturada devido à <strong>amostragem por conveniência</strong>, ou seja, as quatro empresas foram escolhidas pela facilidade de acesso.
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=400&fit=crop" alt="Equipe autônoma">
             </div>
 
-            <p>Em resumo, a metodologia une a análise de estruturas de TI diferenciadas por tipo de cliente com a avaliação de desempenho baseada tanto em indicadores quantitativos (TMA) quanto em dados qualitativos (opinião dos clientes), embora reconheça as restrições de sua amostra limitada.</p>
-        </div>
-
-        <div id="resultados" class="section">
-            <h2>Resultados do Estudo</h2>
-
-            <p>Após coletados os dados durante um ano, também foi feita uma pesquisa de satisfação dos clientes com relação aos serviços prestados. Nesta pesquisa foram coletados dados relacionados à:</p>
-            
-            <ul style="list-style: none; padding-left: 1rem; margin: 1.5rem 0;">
-                <li>📞 Qualidade do atendimento via telefone</li>
-                <li>🖥️ Qualidade dos recursos de autoatendimento (portal de chamados)</li>
-                <li>🎓 Avaliação da competência técnica dos profissionais</li>
-                <li>⭐ Classificação de satisfação geral com os serviços</li>
-            </ul>
-
-            <h3>Projetos A e B - Estruturas Orgânicas</h3>
-
-            <div class="highlight-box">
-                <p>Dos quatro projetos, dois deles (A e B) utilizaram <strong>estruturas organizacionais irregulares</strong>, com uma concentração maior no meio, devido ao foco do projeto, cujo principal negócio (<em>core business</em>) dependia diretamente de solução de TI.</p>
-            </div>
-
-            <p>Esta estrutura organizacional irregular possibilitou um desenvolvimento de sistemas <strong>mais orgânico e com liberdade</strong> para os membros tomarem decisões que mais se adequavam às necessidades dos clientes.</p>
-
-            <div class="card">
-                <h4>✅ Resultados Positivos (Projetos A e B)</h4>
-                <p>• <strong>Avaliações mais positivas</strong> em todos os aspectos</p>
-                <p>• <strong>Melhor impressão dos clientes</strong></p>
-                <p>• <strong>Menor tempo</strong> utilizado para resolver problemas</p>
-                <p>• Equipes compostas por <strong>membros mais experientes</strong></p>
-                <p>• Mesmo sendo equipes menores tratando problemas complexos, foram <strong>mais eficientes</strong></p>
-            </div>
-
-            <h3>Projetos C e D - Estruturas Mecanicistas</h3>
-
-            <p>Já os projetos C e D, compostos por <strong>equipes maiores</strong>, mas também contendo <strong>membros mais inexperientes</strong>, receberam avaliações mais medianas em todos os aspectos, mas com a impressão de esforço necessário para resolver os problemas sendo muito alto.</p>
-
-            <div class="card">
-                <h4>⚠️ Desafios Identificados (Projetos C e D)</h4>
-                <p>• Mais desenvolvedores <strong>inexperientes e com menor senioridade</strong></p>
-                <p>• <strong>Engessamento e mecanicidade</strong> na resolução de tarefas</p>
-                <p>• <strong>Reforçamento da hierarquia</strong></p>
-                <p>• <strong>Menos liberdade</strong> para tomada de decisões</p>
-            </div>
-
-            <h3>Conclusões do Artigo</h3>
-
-            <p>O artigo conclui que <strong>estruturas mais orgânicas</strong> levaram a uma satisfação maior por parte dos clientes, mas também pontua que o foco da empresa que contrata o serviço também é parte importante de se levar em conta, uma vez que não será sempre que uma empresa poderá dar um foco e orçamento maior para projetos.</p>
-
-            <p>Também existe o fato de que membros com menor senioridade precisam ser treinados até chegarem ao ponto de poderem tomar decisões próprias. Até lá, costuma-se utilizar de <strong>estruturas de projetos mais tradicionais</strong> para ensiná-los e levar a uma evolução nas suas capacidades técnicas e de tomada de decisão.</p>
-        </div>
-
-        <div id="administracao" class="section">
-            <h2>Relação com Administração Geral</h2>
-
-            <p>O artigo enfoca e dá como alvo de seu método as teorias contemporâneas, onde enfatiza a flexibilidade em não determinar uma estrutura definitiva para a organização, como a <strong>teoria da contingência</strong> e o modelo de <strong>sistemas orgânicos e mecanicistas</strong>. Entretanto, ainda assim é possível notar algumas referências implicadas nas abordagens clássicas e neoclássicas.</p>
-
-            <h3>Teoria Clássica da Administração (Henri Fayol)</h3>
-
-            <p>A Teoria Clássica da Administração, proposta por Henri Fayol no início do século XX, está presente de maneira indireta nas disposições mecanicistas analisadas pelos autores. O artigo descreve que nesse tipo de estrutura as funções podem ser juntamente com os mecanismos metódicos atribuir responsabilidades e poderes autossuficientes, com suas hierarquias e fronteiras devidamente delimitadas.</p>
-
-            <div class="highlight-box">
-                <strong>Princípios de Fayol presentes nas estruturas mecanicistas:</strong>
-                <p>• Autoridade e responsabilidade</p>
-                <p>• Unidade de comando</p>
-                <p>• Disciplina e ordem</p>
-                <p>• Hierarquia rígida</p>
-                <p>• Divisão clara de funções</p>
-                <p>• Centralização do poder decisório</p>
-            </div>
-
-            <p>Nos casos estudados, especialmente os <strong>Projetos C e D</strong>, referentes a empresas cujo negócio não depende diretamente de TI (como construtoras e indústrias), observa-se a predominância de estruturas hierárquicas e funcionais, nas quais cada colaborador possui atribuições bem delimitadas e responde a um superior direto.</p>
-
-            <h3>Administração Científica (Frederick Taylor)</h3>
-
-            <p>Essa influência clássica também aparece no modo como os processos são formalizados e monitorados. O artigo descreve que, nas estruturas mecanicistas, há <strong>forte padronização e formalização de tarefas</strong>, o que assegura previsibilidade e controle, mas reduz a flexibilidade e a agilidade operacional.</p>
-
-            <p>Tal lógica deriva diretamente dos princípios de <strong>organização racional do trabalho</strong> propostos pela Administração Científica de Frederick Taylor, que buscava eficiência por meio da especialização e da padronização das atividades.</p>
-
-            <h3>Teorias Neoclássicas da Administração</h3>
-
-            <p>As teorias neoclássicas da Administração, desenvolvidas a partir da década de 1950, ajudam a explicar as transformações e ajustes observados nas organizações que buscam maior eficiência e flexibilidade. A neoclássica, ao retomar e atualizar os princípios clássicos, propõe uma <strong>administração orientada a resultados</strong>, enfatizando a importância da delegação de autoridade e descentralização.</p>
-
-            <p>No artigo, essa perspectiva aparece na análise das <strong>estruturas orgânicas</strong>, utilizadas por clientes cujo <em>core business</em> depende diretamente de TI, como bancos e operadoras de cartões. Nessas organizações, o trabalho em equipe, a comunicação horizontal e a autonomia dos profissionais são valorizadas, permitindo respostas mais rápidas e eficazes às necessidades dos clientes.</p>
-
-            <div class="grid-2">
-                <div class="card">
-                    <h4>📚 Abordagem Clássica</h4>
-                    <p><strong>Foco:</strong> Hierarquia e controle</p>
-                    <p><strong>Características:</strong></p>
-                    <p>• Estruturas verticalizadas</p>
-                    <p>• Especialização do trabalho</p>
-                    <p>• Padronização de processos</p>
-                    <p>• Centralização decisória</p>
-                </div>
-                <div class="card">
-                    <h4>🚀 Abordagem Neoclássica</h4>
-                    <p><strong>Foco:</strong> Resultados e flexibilidade</p>
-                    <p><strong>Características:</strong></p>
-                    <p>• Descentralização</p>
-                    <p>• Delegação de autoridade</p>
-                    <p>• Orientação por objetivos</p>
-                    <p>• Autonomia das equipes</p>
-                </div>
-            </div>
-
-            <h3>Indicadores de Desempenho (Peter Drucker)</h3>
-
-            <p>Além disso, a ênfase no desempenho e nos resultados, característica das teorias neoclássicas, é evidenciada no uso de indicadores como o <strong>Tempo Médio de Atendimento (TMA)</strong> e a <strong>satisfação dos clientes</strong>.</p>
-
-            <p>Esses instrumentos de mensuração se relacionam ao princípio da eficiência defendido por Peter Drucker e à ideia de que a estrutura deve ser avaliada não apenas pela obediência às normas, mas pela sua <strong>capacidade de gerar valor e produtividade</strong>.</p>
-
-            <h3>Síntese: Coexistência de Abordagens</h3>
-
-            <div class="highlight-box">
-                <p>Em síntese, a análise do artigo demonstra que as teorias clássicas e neoclássicas da Administração ainda são essenciais para compreender as estruturas organizacionais atuais.</p>
-                
-                <p><strong>As organizações estudadas refletem:</strong></p>
-                <p>• De um lado: a herança de Fayol — hierarquia e controle</p>
-                <p>• De outro: a influência neoclássica — flexibilidade, eficácia e orientação para resultados</p>
-            </div>
-
-            <p>A coexistência dessas abordagens reforça a ideia de que a gestão moderna não abandona os princípios clássicos, mas os <strong>adapta às novas realidades organizacionais</strong>, especialmente quando a tecnologia e o conhecimento se tornam fatores centrais de competitividade e desempenho operacional.</p>
+            <h3>Aplicação de Teorias Administrativas</h3>
+            <p>Aplicando as teorias administrativas estudadas, é possível formular recomendações para melhoria do desempenho organizacional. A Teoria Contingencial sugere que empresas de tecnologia operando em ambientes de alta incerteza devem adotar estruturas mais orgânicas e flexíveis. A Teoria dos Sistemas reforça a importância de integração entre diferentes áreas funcionais.</p>
         </div>
 
         <div id="conclusao" class="section">
-            <h2>Conclusão</h2>
+            <h2>5. Conclusão</h2>
 
-            <p>O presente trabalho analisou o artigo "Análise da Relação entre a Estrutura Organizacional e o Desempenho Operacional na Prestação de Serviços de TI de Alto Valor Agregado", de Giraldeli e Picchiai (2015), demonstrando a relevância da estrutura organizacional para o desempenho na prestação de serviços de tecnologia da informação.</p>
+            <p>Este estudo analisou as diferenças entre estruturas organizacionais tradicionais e inovativas no setor de tecnologia, evidenciando impactos significativos no desempenho empresarial em múltiplas dimensões. Os resultados confirmam que estruturas inovativas, caracterizadas por maior flexibilidade, horizontalização hierárquica e autonomia de equipes, apresentam vantagens competitivas relevantes em ambientes de alta volatilidade e necessidade constante de inovação.</p>
 
-            <h3>Principais Achados</h3>
-
-            <p>Através do estudo de caso apresentado, ficou evidente que <strong>não existe um modelo único</strong> de estrutura organizacional aplicável a todas as situações. A escolha entre estruturas mecanicistas, caracterizadas por hierarquias rígidas e processos formalizados, e estruturas orgânicas, marcadas pela flexibilidade e autonomia decisória, deve considerar o contexto específico de cada organização, especialmente a centralidade da TI no <em>core business</em> do cliente.</p>
-
-            <div class="grid-2">
-                <div class="card">
-                    <h4>✅ Estruturas Orgânicas</h4>
-                    <p><strong>Quando TI é estratégica:</strong></p>
-                    <p>• Maior satisfação dos clientes</p>
-                    <p>• Menor tempo médio de atendimento</p>
-                    <p>• Melhor percepção de competência técnica</p>
-                    <p>• Maior liberdade decisória</p>
-                </div>
-                <div class="card">
-                    <h4>📋 Estruturas Hierárquicas</h4>
-                    <p><strong>Quando TI não é o foco:</strong></p>
-                    <p>• Adequadas para redução de custos</p>
-                    <p>• Importantes para treinamento</p>
-                    <p>• Desenvolvimento de profissionais juniores</p>
-                    <p>• Maior controle e padronização</p>
-                </div>
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&h=400&fit=crop" alt="Sucesso organizacional">
             </div>
 
-            <h3>Conexão com as Teorias Administrativas</h3>
+            <h3>Principais Contribuições</h3>
+            <div class="highlight-box">
+                <p><strong>1.</strong> Sistematização de evidências sobre como a estrutura organizacional influencia aspectos críticos para empresas de tecnologia</p>
+                <p><strong>2.</strong> Validação da perspectiva contingencial na escolha de modelos estruturais</p>
+                <p><strong>3.</strong> Recomendações práticas para melhoria do desempenho organizacional</p>
+            </div>
 
-            <p>A análise revelou a presença marcante das <strong>teorias clássicas e neoclássicas</strong> da administração nas práticas organizacionais contemporâneas. Os princípios de Fayol sobre hierarquia e divisão do trabalho permanecem fundamentais nas estruturas mecanicistas, enquanto as contribuições neoclássicas, com ênfase em resultados e descentralização, orientam as estruturas orgânicas mais adaptativas.</p>
+            <h3>Recomendações Práticas</h3>
+            <p>As recomendações incluem a adoção de estruturas mais horizontais e flexíveis para empresas que buscam competir através de inovação e diferenciação, a implementação de mecanismos que promovam autonomia de equipes técnicas sem comprometer coordenação organizacional, e o investimento em processos de gestão de mudança para facilitar transições estruturais.</p>
 
-            <h3>Relevância para Profissionais de ADS</h3>
+            <h3>Limitações e Pesquisas Futuras</h3>
+            <p>As limitações deste estudo incluem a natureza predominantemente teórica da análise, baseada em revisão bibliográfica sem coleta de dados primários em organizações específicas. Pesquisas futuras poderiam aprofundar a compreensão através de estudos de caso empíricos em empresas de tecnologia que passaram por transformações estruturais.</p>
 
             <div class="highlight-box">
-                <strong>Lição fundamental:</strong> O sucesso na área de tecnologia não depende apenas de competências técnicas, mas também da capacidade de compreender e atuar em diferentes contextos organizacionais.
+                <strong>Conclusão Final:</strong> A escolha da estrutura organizacional representa decisão estratégica fundamental para empresas de tecnologia, com impactos diretos e mensuráveis no desempenho organizacional. O sucesso neste setor cada vez mais competitivo depende da capacidade de adotar configurações estruturais que equilibrem eficiência operacional com flexibilidade e capacidade de inovação.
             </div>
-
-            <p>Para os futuros profissionais de Análise e Desenvolvimento de Sistemas, este estudo ressalta que a gestão eficaz de projetos de TI exige:</p>
-
-            <ul style="list-style: none; padding-left: 1rem; margin: 1.5rem 0;">
-                <li>🎯 Conhecimento sobre estruturas organizacionais</li>
-                <li>👥 Gestão de pessoas e equipes</li>
-                <li>📊 Alinhamento estratégico entre tecnologia e negócio</li>
-                <li>🔄 Adaptabilidade a diferentes contextos</li>
-                <li>💡 Equilíbrio entre competências técnicas e gerenciais</li>
-            </ul>
-
-            <h3>Considerações Finais</h3>
-
-            <p>Conclui-se que a estrutura organizacional é <strong>elemento determinante</strong> para o desempenho operacional em serviços de TI, e a integração entre conhecimentos administrativos e técnicos forma a base para profissionais completos e preparados para o mercado.</p>
-
-            <p>A flexibilidade para adaptar modelos organizacionais conforme o contexto, aliada ao investimento em profissionais experientes e à criação de ambientes que promovam autonomia e colaboração, representa caminho promissor para empresas que buscam excelência no setor tecnológico.</p>
         </div>
 
         <div id="referencias" class="section">
             <h2>Referências</h2>
 
             <div class="references">
-                <p><strong>GIRALDELI, Carlos Giovani; PICCHIAI, Djair.</strong> Análise da Relação entre a Estrutura Organizacional e o Desempenho Operacional na Prestação de Serviços de TI de Alto Valor Agregado. <em>Revista Eletrônica de Estratégia & Negócios</em>, v. 8, n. 3, p. 205-243, 2015. Disponível em: https://repositorio.fgv.br/items/f61cc199-6b65-4312-b1dc-8b1e16f13580. Acesso em: 08 out. 2025.</p>
+                <p><strong>CENTRO DE ESTUDOS EM GESTÃO.</strong> Estruturas organizacionais e desempenho empresarial. <strong>Repositório FGV</strong>, 2024. Disponível em: https://repositorio.fgv.br/items/f61cc199-6b65-4312-b1dc-8b1e16f13580.</p>
             </div>
 
             <div class="references">
-                <p><strong>CHIAVENATO, Idalberto.</strong> <em>Introdução à Teoria Geral da Administração.</em> 9. ed. São Paulo: Manole, 2014.</p>
+                <p><strong>CHIAVENATO, Idalberto.</strong> <em>Introdução à teoria geral da administração.</em> 9. ed. São Paulo: Manole, 2014.</p>
             </div>
 
             <div class="references">
-                <p><strong>SOBRAL, Filipe; PECI, Alketa.</strong> <em>Administração: Teoria e Prática no Contexto Brasileiro.</em> 2. ed. São Paulo: Pearson, 2013.</p>
+                <p><strong>DAFT, Richard L.</strong> <em>Organizações: teoria e projetos.</em> 11. ed. São Paulo: Cengage Learning, 2015.</p>
             </div>
 
             <div class="references">
-                <p><strong>ROBBINS, Stephen P.; JUDGE, Timothy A.; SOBRAL, Filipe.</strong> <em>Comportamento Organizacional: Teoria e Prática no Contexto Brasileiro.</em> 14. ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+                <p><strong>MINTZBERG, Henry.</strong> <em>Criando organizações eficazes: estruturas em cinco configurações.</em> 2. ed. São Paulo: Atlas, 2003.</p>
             </div>
 
             <div class="references">
-                <p><strong>PICCHIAI, Djair.</strong> Modelos de Estruturas Organizacionais. <em>EAESP-FGV</em>, São Paulo, 2011.</p>
+                <p><strong>ROBBINS, Stephen P.; JUDGE, Timothy A.; SOBRAL, Filipe.</strong> <em>Comportamento organizacional: teoria e prática no contexto brasileiro.</em> 14. ed. São Paulo: Pearson Prentice Hall, 2010.</p>
             </div>
 
             <div class="references">
-                <p><strong>MINTZBERG, Henry.</strong> <em>Criando Organizações Eficazes: Estruturas em Cinco Configurações.</em> 2. ed. São Paulo: Atlas, 2003.</p>
+                <p><strong>SOBRAL, Filipe; PECI, Alketa.</strong> <em>Administração: teoria e prática no contexto brasileiro.</em> 2. ed. São Paulo: Pearson Education do Brasil, 2013.</p>
             </div>
 
-            <div class="references">
-                <p><strong>VERGARA, Sylvia Constant.</strong> <em>Projetos e Relatórios de Pesquisa em Administração.</em> 9. ed. São Paulo: Atlas, 2007.</p>
+            <div class="image-container" style="margin-top: 3rem;">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=300&fit=crop" alt="Biblioteca e livros">
             </div>
         </div>
     </div>
 
-    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ↑
+    </div>
 
     <footer class="footer">
         <div class="container">
             <p><strong>FATEC - Faculdade de Tecnologia de Ribeirão Preto</strong></p>
             <p>Trabalho de Administração Geral | 1º Bimestre 2025</p>
-            <p>Profª Drª Suzana Márcia Marangoni</p>
-            <p style="margin-top: 1rem; opacity: 0.8;">© 2025 - Estruturas Organizacionais em Tecnologia</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">© 2025 - Todos os direitos reservados</p>
         </div>
     </footer>
 
     <script>
+        // Mapa de nomes das seções
         const sectionNames = {
+            'resumo': 'Resumo',
             'introducao': 'Introdução',
-            'justificativa': 'Justificativa',
+            'fundamentacao': 'Fundamentação Teórica',
             'metodologia': 'Metodologia',
-            'resultados': 'Resultados',
-            'administracao': 'Relação com Adm. Geral',
+            'discussao': 'Discussão',
             'conclusao': 'Conclusão',
             'referencias': 'Referências'
         };
@@ -882,51 +838,44 @@
         }
 
         function showSection(sectionId) {
+            // Remove active class from all sections and buttons
             const sections = document.querySelectorAll('.section');
             const buttons = document.querySelectorAll('.nav-tabs button');
             
             sections.forEach(section => section.classList.remove('active'));
             buttons.forEach(button => button.classList.remove('active'));
             
+            // Add active class to selected section and button
             const activeSection = document.getElementById(sectionId);
             activeSection.classList.add('active');
             event.target.classList.add('active');
             
+            // Atualiza o texto do header mobile
             const currentSectionDisplay = document.getElementById('currentSection');
             if (currentSectionDisplay) {
                 currentSectionDisplay.textContent = sectionNames[sectionId] || 'Menu';
             }
             
+            // Fecha o menu mobile
             if (window.innerWidth <= 768) {
                 toggleMenu();
             }
             
-            // Aguarda um pouco para o menu fechar antes de rolar
-            setTimeout(() => {
-                // Considera a altura do header mobile se estiver em mobile
-                let headerOffset = 20;
-                
-                if (window.innerWidth <= 768) {
-                    const mobileHeader = document.querySelector('.mobile-nav-header');
-                    if (mobileHeader) {
-                        headerOffset = mobileHeader.offsetHeight + 20;
-                    }
-                } else {
-                    const navTabs = document.querySelector('.nav-tabs');
-                    if (navTabs) {
-                        headerOffset = navTabs.offsetHeight + 20;
-                    }
-                }
-                
-                const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
-                
-                window.scrollTo({ 
-                    top: sectionPosition - headerOffset,
-                    behavior: 'smooth' 
-                });
-            }, window.innerWidth <= 768 ? 300 : 0); // Aguarda 300ms no mobile para o menu fechar
+            // Pega a altura do menu fixo + uma margem
+            const navTabs = document.querySelector('.nav-tabs');
+            const menuHeight = navTabs.offsetHeight + 20; // 20px de margem extra
+            
+            // Pega a posição da seção
+            const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+            
+            // Rola para a seção considerando a altura do menu
+            window.scrollTo({ 
+                top: sectionPosition - menuHeight,
+                behavior: 'smooth' 
+            });
         }
 
+        // Scroll to top button functionality
         window.addEventListener('scroll', function() {
             const scrollTop = document.getElementById('scrollTop');
             if (window.pageYOffset > 300) {
@@ -935,7 +884,7 @@
                 scrollTop.classList.remove('visible');
             }
 
-            // Desktop: Detecta quando o menu fica fixo no topo
+            // Desktop: Detecta quando o menu realmente fica fixo no topo da tela
             if (window.innerWidth > 768) {
                 const navTabs = document.querySelector('.nav-tabs');
                 const navRect = navTabs.getBoundingClientRect();
@@ -946,7 +895,7 @@
                     navTabs.classList.remove('fixed-header');
                 }
             } else {
-                // Mobile: Detecta quando o header mobile fica fixo
+                // Mobile: Detecta quando o header mobile fica fixo no topo
                 const mobileHeader = document.querySelector('.mobile-nav-header');
                 if (mobileHeader) {
                     const headerRect = mobileHeader.getBoundingClientRect();
@@ -964,6 +913,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Add smooth scrolling for all internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -974,7 +924,7 @@
             });
         });
 
-        // Adiciona animação ao scroll
+        // Add animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -989,8 +939,8 @@
             });
         }, observerOptions);
 
-        // Observa todos os cards e imagens para animação
-        document.querySelectorAll('.card, .highlight-box').forEach(el => {
+        // Observe all cards and images
+        document.querySelectorAll('.card, .image-container').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease';
