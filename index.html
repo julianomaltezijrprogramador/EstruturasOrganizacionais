@@ -25,6 +25,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background: var(--fatec-light-gray);
+            overflow-x: hidden;
         }
 
         .header {
@@ -104,6 +105,18 @@
             opacity: 0.95;
         }
 
+        .mobile-nav-header {
+            display: none;
+        }
+
+        .hamburger-menu {
+            display: none;
+        }
+
+        .menu-overlay {
+            display: none;
+        }
+
         .nav-tabs {
             display: flex;
             gap: 0.5rem;
@@ -127,14 +140,6 @@
             padding-left: 2rem;
             padding-right: 2rem;
             box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-        }
-
-        .mobile-nav-header {
-            display: none;
-        }
-
-        .hamburger-menu {
-            display: none;
         }
 
         .nav-tabs button {
@@ -163,13 +168,12 @@
             margin: 0 0 1.5rem 0;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: none;
+            display: block;
             animation: fadeIn 0.5s ease;
-            scroll-margin-top: 120px;
         }
 
         .section.active {
-            display: block;
+            /* Mantém a classe para compatibilidade, mas não altera display */
         }
 
         @keyframes fadeIn {
@@ -332,6 +336,35 @@
             font-size: 1.1rem;
         }
 
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--fatec-red);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--fatec-dark-red);
+            transform: translateY(-5px);
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 1rem;
@@ -381,26 +414,21 @@
                 font-size: 1rem;
             }
 
-            /* Mobile Navigation */
             .mobile-nav-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 1rem;
+                padding: 1rem 2rem;
                 background: var(--white);
                 border-bottom: 3px solid var(--fatec-red);
                 position: sticky;
                 top: 0;
                 z-index: 998;
                 transition: all 0.3s ease;
-                margin-left: -1rem;
-                margin-right: -1rem;
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
-
-            .mobile-nav-header.fixed-header {
-                box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+                width: 100vw;
+                margin-left: calc(-50vw + 50%);
+                margin-right: calc(-50vw + 50%);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             }
 
             .mobile-current-section {
@@ -473,11 +501,6 @@
                 display: block;
             }
 
-            .nav-tabs.fixed-header {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
             .card {
                 padding: 1.5rem;
             }
@@ -501,35 +524,6 @@
             .container {
                 padding: 0 1rem;
             }
-        }
-
-        .scroll-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--fatec-red);
-            color: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            background: var(--fatec-dark-red);
-            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -776,7 +770,7 @@
             <h2>Referências</h2>
 
             <div class="references">
-                <p><strong>CENTRO DE ESTUDOS EM GESTÃO.</strong> Estruturas organizacionais e desempenho empresarial. <strong>Repositório FGV</strong>, 2024. Disponível em: https://repositorio.fgv.br/items/f61cc199-6b65-4312-b1dc-8b1e16f13580.</p>
+                <p><strong>CENTRO DE ESTUDOS EM GESTÃO.</strong> Estruturas organizacionais e desempenho empresarial. <strong>Repositório FGV</strong>, 2024. Disponível em: https://repositorio.fgv.br/items/f61cc199-6b65-4312-b1dc-8b1e16f13580. Acesso em: 6 out. 2025.</p>
             </div>
 
             <div class="references">
@@ -829,6 +823,9 @@
             'referencias': 'Referências'
         };
 
+        let isScrollingFromClick = false;
+        let scrollTimeout = null;
+
         function toggleMenu() {
             const navTabs = document.querySelector('.nav-tabs');
             const overlay = document.getElementById('menuOverlay');
@@ -838,41 +835,105 @@
         }
 
         function showSection(sectionId) {
-            // Remove active class from all sections and buttons
-            const sections = document.querySelectorAll('.section');
+            // Marca que estamos rolando por clique
+            isScrollingFromClick = true;
+            
+            // Limpa timeout anterior se existir
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            
+            // Fecha o menu mobile se estiver aberto
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                toggleMenu();
+            }
+            
+            // Atualiza manualmente os botões e o header mobile
             const buttons = document.querySelectorAll('.nav-tabs button');
-            
-            sections.forEach(section => section.classList.remove('active'));
-            buttons.forEach(button => button.classList.remove('active'));
-            
-            // Add active class to selected section and button
-            const activeSection = document.getElementById(sectionId);
-            activeSection.classList.add('active');
-            event.target.classList.add('active');
-            
-            // Atualiza o texto do header mobile
             const currentSectionDisplay = document.getElementById('currentSection');
+            
+            buttons.forEach(button => {
+                const buttonSection = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                if (buttonSection === sectionId) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+            
             if (currentSectionDisplay) {
                 currentSectionDisplay.textContent = sectionNames[sectionId] || 'Menu';
             }
             
-            // Fecha o menu mobile
-            if (window.innerWidth <= 768) {
-                toggleMenu();
+            // Pega a seção alvo
+            const targetSection = document.getElementById(sectionId);
+            
+            // Aguarda o fechamento do menu antes de rolar
+            setTimeout(() => {
+                // Calcula offset baseado no dispositivo
+                let offset;
+                if (isMobile) {
+                    const mobileHeader = document.querySelector('.mobile-nav-header');
+                    offset = mobileHeader ? mobileHeader.offsetHeight + 10 : 80;
+                } else {
+                    const navTabs = document.querySelector('.nav-tabs');
+                    offset = navTabs ? navTabs.offsetHeight + 20 : 100;
+                }
+                
+                // Rola até a seção
+                const sectionPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ 
+                    top: sectionPosition - offset,
+                    behavior: 'smooth' 
+                });
+                
+                // Reativa a detecção automática após 1 segundo
+                scrollTimeout = setTimeout(() => {
+                    isScrollingFromClick = false;
+                }, 1000);
+            }, isMobile ? 300 : 0);
+        }
+
+        // Detecta qual seção está visível e atualiza menu automaticamente
+        function updateActiveSection() {
+            // Não atualiza se estamos rolando por clique
+            if (isScrollingFromClick) {
+                return;
             }
             
-            // Pega a altura do menu fixo + uma margem
-            const navTabs = document.querySelector('.nav-tabs');
-            const menuHeight = navTabs.offsetHeight + 20; // 20px de margem extra
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('.nav-tabs button');
+            const currentSectionDisplay = document.getElementById('currentSection');
             
-            // Pega a posição da seção
-            const sectionPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+            let currentSection = 'resumo';
             
-            // Rola para a seção considerando a altura do menu
-            window.scrollTo({ 
-                top: sectionPosition - menuHeight,
-                behavior: 'smooth' 
+            // Calcula qual seção está mais visível na viewport
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const isMobile = window.innerWidth <= 768;
+                const threshold = isMobile ? 100 : 150;
+                
+                // Se o topo da seção está próximo do topo da viewport
+                if (rect.top <= threshold && rect.bottom >= threshold) {
+                    currentSection = section.id;
+                }
             });
+            
+            // Atualiza os botões ativos
+            buttons.forEach(button => {
+                const buttonSection = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                if (buttonSection === currentSection) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+            
+            // Atualiza o texto do header mobile
+            if (currentSectionDisplay) {
+                currentSectionDisplay.textContent = sectionNames[currentSection] || 'Menu';
+            }
         }
 
         // Scroll to top button functionality
@@ -894,19 +955,10 @@
                 } else {
                     navTabs.classList.remove('fixed-header');
                 }
-            } else {
-                // Mobile: Detecta quando o header mobile fica fixo no topo
-                const mobileHeader = document.querySelector('.mobile-nav-header');
-                if (mobileHeader) {
-                    const headerRect = mobileHeader.getBoundingClientRect();
-                    
-                    if (headerRect.top <= 0) {
-                        mobileHeader.classList.add('fixed-header');
-                    } else {
-                        mobileHeader.classList.remove('fixed-header');
-                    }
-                }
             }
+            
+            // Atualiza a seção ativa baseado no scroll
+            updateActiveSection();
         });
 
         function scrollToTop() {
